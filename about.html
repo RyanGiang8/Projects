@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Ryan Giang Photography</title>
+<link rel="stylesheet" href="site.css">
+<style>
+  /* ---- EDIT ME: hero ---- */
+  .hero{padding:64px 24px 56px;max-width:760px;}
+  .hero .eyebrow{color:#9ca3af;font-size:.9rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:16px;}
+  .hero h1{font-size:2.5rem;letter-spacing:-0.02em;font-weight:600;line-height:1.15;}
+  .hero p{color:#9ca3af;margin-top:20px;font-size:1.1rem;max-width:560px;}
+  .hero .cta-row{display:flex;gap:16px;margin-top:32px;flex-wrap:wrap;}
+  .btn{
+    display:inline-block;padding:14px 24px;font-size:.95rem;cursor:pointer;
+    border:1px solid #1f2937;transition:background .2s,color .2s,border-color .2s;
+    min-height:44px;font-family:inherit;
+  }
+  .btn:focus-visible{outline:2px solid #fff;outline-offset:2px;}
+  .btn-primary{background:#fff;color:#000;border-color:#fff;}
+  .btn-primary:hover{background:#d1d5db;}
+  .btn-secondary{background:none;color:#fff;}
+  .btn-secondary:hover{border-color:#fff;}
+  @media(min-width:768px){
+    .hero{padding:88px 48px 72px;}
+    .hero h1{font-size:3.5rem;}
+  }
+
+  /* ---- shared section scaffolding ---- */
+  section{padding:56px 24px;border-top:1px solid #1f2937;}
+  section .section-label{color:#9ca3af;font-size:.85rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:24px;}
+  section h2{font-size:1.75rem;letter-spacing:-0.01em;margin-bottom:20px;}
+  @media(min-width:768px){ section{padding:72px 48px;} }
+
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ---- EDIT ME: bio ---- */
+  .bio-grid{display:grid;grid-template-columns:1fr;gap:32px;max-width:920px;}
+  .bio-grid p{color:#d1d5db;margin-bottom:16px;line-height:1.75;}
+  .bio-grid p:last-child{margin-bottom:0;}
+  @media(min-width:900px){ .bio-grid{grid-template-columns:1fr 1fr;} }
+
+  /* ---- EDIT ME: skills / equipment ---- */
+  .skills-grid{display:grid;grid-template-columns:1fr;gap:32px;max-width:920px;}
+  @media(min-width:768px){ .skills-grid{grid-template-columns:repeat(3,1fr);} }
+  .skill-group h3{font-size:1rem;margin-bottom:14px;color:#fff;}
+  .skill-group ul{list-style:none;}
+  .skill-group li{
+    color:#9ca3af;font-size:.95rem;padding:8px 0 8px 16px;border-left:2px solid #1f2937;margin-bottom:4px;
+  }
+
+  /* ---- EDIT ME: experience timeline ---- */
+  .timeline{max-width:760px;}
+  .timeline-item{position:relative;padding-left:28px;padding-bottom:32px;border-left:1px solid #1f2937;}
+  .timeline-item:last-child{padding-bottom:0;}
+  .timeline-item::before{
+    content:'';position:absolute;left:-5px;top:4px;width:9px;height:9px;
+    border-radius:50%;background:#fff;
+  }
+  .timeline-item .year{color:#9ca3af;font-size:.85rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px;}
+  .timeline-item h3{font-size:1.1rem;margin-bottom:6px;}
+  .timeline-item p{color:#9ca3af;font-size:.95rem;line-height:1.6;max-width:560px;}
+
+  /* ---- EDIT ME: closing CTA ---- */
+  .cta-section{text-align:left;}
+  .cta-section h2{font-size:2rem;max-width:520px;}
+  .cta-section p{color:#9ca3af;margin:16px 0 28px;max-width:480px;}
+</style>
+</head>
+<body>
+
+<div class="sitenav">
+  <a href="index.html" class="brand">Ryan Giang</a>
+  <div class="sitenav-links">
+    <a href="index.html">Work</a>
+    <a href="about.html" class="current">About</a>
+    <button type="button" data-open-contact>Contact</button>
+  </div>
+</div>
+
+<!-- ============ EDIT ME: HERO ============ -->
+<section class="hero" style="border-top:none;">
+  <p class="eyebrow">About</p>
+  <h1>Hi, I'm Ryan — a photographer chasing light wherever it shows up.</h1>
+  <p>
+    I shoot automotive, landscape, astrophotography, portrait, street, and corporate
+    work, with an eye for clean composition and real moments over staged ones.
+    Based [your city] — available for shoots locally and for travel.
+  </p>
+  <div class="cta-row">
+    <a href="index.html" class="btn btn-primary">View My Work</a>
+    <button type="button" class="btn btn-secondary" data-open-contact>Get in Touch</button>
+  </div>
+</section>
+
+<!-- ============ EDIT ME: BIO ============ -->
+<section>
+  <p class="section-label">Bio</p>
+  <div class="bio-grid reveal">
+    <p>
+      [Replace this with your story. How did you get into photography — was it a
+      camera you picked up on a whim, a car meet you brought a lens to, a trip
+      where you couldn't stop shooting? Give it a sentence or two of real texture.]
+    </p>
+    <p>
+      [Talk about what drives the work now: what you're drawn to shoot, the mood
+      you go for, what makes a shot feel "done" to you. This is also a good place
+      to mention any clients, publications, or projects you're proud of.]
+    </p>
+  </div>
+</section>
+
+<!-- ============ EDIT ME: SKILLS / EQUIPMENT ============ -->
+<section>
+  <p class="section-label">Skills &amp; Equipment</p>
+  <h2>What I shoot with</h2>
+  <div class="skills-grid reveal">
+    <div class="skill-group">
+      <h3>Camera Bodies</h3>
+      <ul>
+        <li>[Camera body 1]</li>
+        <li>[Camera body 2]</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h3>Lenses</h3>
+      <ul>
+        <li>[Lens 1, e.g. 24-70mm f/2.8]</li>
+        <li>[Lens 2]</li>
+        <li>[Lens 3]</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h3>Editing &amp; Specialties</h3>
+      <ul>
+        <li>[e.g. Lightroom / Capture One]</li>
+        <li>[e.g. Long-exposure astrophotography]</li>
+        <li>[e.g. Studio &amp; natural-light portraits]</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDIT ME: EXPERIENCE / HIGHLIGHTS ============ -->
+<section>
+  <p class="section-label">Experience</p>
+  <h2>Highlights</h2>
+  <div class="timeline reveal">
+    <div class="timeline-item">
+      <p class="year">[Year]</p>
+      <h3>[Milestone title, e.g. "Started shooting automotive meets"]</h3>
+      <p>[One or two lines about what happened and why it mattered.]</p>
+    </div>
+    <div class="timeline-item">
+      <p class="year">[Year]</p>
+      <h3>[Milestone title]</h3>
+      <p>[One or two lines about what happened and why it mattered.]</p>
+    </div>
+    <div class="timeline-item">
+      <p class="year">[Year]</p>
+      <h3>[Milestone title, e.g. first paid shoot, a feature, a published photo]</h3>
+      <p>[One or two lines about what happened and why it mattered.]</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDIT ME: CLOSING CTA ============ -->
+<section class="cta-section reveal">
+  <h2>Let's create something together.</h2>
+  <p>Whether it's a car shoot, a portrait session, or something else entirely — I'd love to hear about it.</p>
+  <button type="button" class="btn btn-primary" data-open-contact>Get in Touch</button>
+</section>
+
+<footer>
+  <div class="row">
+    <p>&copy; 2026 Ryan Giang. All rights reserved.</p>
+    <div class="links">
+      <a href="https://www.instagram.com/capitalcarz/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.linkedin.com/in/ryangiang/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="index.html">Work</a>
+      <button type="button" data-open-contact>Contact</button>
+    </div>
+  </div>
+</footer>
+
+<div id="contactModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+  <div class="modal">
+    <button class="modal-close" id="contactClose" aria-label="Close contact form">&times;</button>
+    <h2 id="contactTitle">Get in Touch</h2>
+    <p class="modal-sub">Have a project in mind, or just want to say hi? Send a message below.</p>
+    <form id="contactForm" novalidate>
+      <label for="cf-name">Name</label>
+      <input type="text" id="cf-name" name="name" autocomplete="name" required>
+      <label for="cf-email">Email</label>
+      <input type="email" id="cf-email" name="email" autocomplete="email" required>
+      <label for="cf-message">Message</label>
+      <textarea id="cf-message" name="message" rows="5" required></textarea>
+      <button type="submit" id="cf-submit">Send Message</button>
+      <p class="form-status" id="cf-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</div>
+
+<script src="contact.js"></script>
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

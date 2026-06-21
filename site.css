@@ -1,0 +1,94 @@
+/* Shared design system — Ryan Giang Photography
+   Used by index.html and about.html. Edit here to change site-wide look. */
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;}
+}
+body{background:#000;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;}
+
+/* top site nav, shared across pages */
+.sitenav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:20px 24px;border-bottom:1px solid #1f2937;
+}
+.sitenav .brand{font-size:1.05rem;font-weight:600;letter-spacing:-0.01em;cursor:pointer;}
+.sitenav .sitenav-links{display:flex;gap:28px;font-size:.95rem;}
+.sitenav .sitenav-links a,
+.sitenav .sitenav-links button{
+  background:none;border:none;font-family:inherit;font-size:inherit;
+  color:#9ca3af;cursor:pointer;transition:color .2s;padding:10px 2px;
+}
+.sitenav .sitenav-links a:hover,
+.sitenav .sitenav-links button:hover{color:#fff;}
+.sitenav .sitenav-links a.current{color:#fff;}
+@media(min-width:768px){ .sitenav{padding:24px 48px;} }
+
+/* footer, shared across pages */
+footer{
+  padding:32px 24px;border-top:1px solid #1f2937;
+  display:flex;flex-direction:column;gap:16px;
+}
+footer .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+footer p{color:#6b7280;font-size:.875rem;}
+footer .links{display:flex;gap:24px;flex-wrap:wrap;}
+footer .links a,
+footer .links button{
+  background:none;border:none;font-family:inherit;
+  color:#9ca3af;font-size:.875rem;cursor:pointer;transition:color .2s;padding:10px 0;
+}
+footer .links a:hover,
+footer .links button:hover{color:#fff;}
+@media(min-width:768px){ footer{padding:48px 48px;flex-direction:row;} }
+
+/* generic modal, used for the contact form */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;
+  align-items:center;justify-content:center;z-index:60;padding:24px;
+}
+.modal-overlay.open{display:flex;}
+.modal{
+  background:#0a0a0a;border:1px solid #1f2937;max-width:480px;width:100%;
+  padding:36px 28px;position:relative;max-height:90vh;overflow-y:auto;
+}
+.modal h2{font-size:1.5rem;letter-spacing:-0.01em;margin-bottom:8px;}
+.modal-sub{color:#9ca3af;font-size:.9rem;margin-bottom:24px;}
+.modal-close{
+  position:absolute;top:12px;right:12px;background:none;border:none;
+  color:#fff;font-size:1.5rem;cursor:pointer;line-height:1;
+  padding:12px;min-width:44px;min-height:44px;
+}
+.modal-close:focus-visible,
+#contactForm input:focus-visible,
+#contactForm textarea:focus-visible,
+#contactForm button:focus-visible,
+.sitenav a:focus-visible,
+.sitenav button:focus-visible,
+footer a:focus-visible,
+footer button:focus-visible{
+  outline:2px solid #fff;outline-offset:2px;
+}
+
+#contactForm label{display:block;font-size:.8rem;color:#9ca3af;margin:16px 0 6px;}
+#contactForm label:first-of-type{margin-top:0;}
+#contactForm input,
+#contactForm textarea{
+  width:100%;background:#111827;border:1px solid #1f2937;color:#fff;
+  padding:12px;font-size:1rem;font-family:inherit;border-radius:2px;resize:vertical;
+}
+#contactForm input:focus,
+#contactForm textarea:focus{border-color:#6b7280;}
+#contactForm button[type="submit"]{
+  margin-top:22px;width:100%;background:#fff;color:#000;border:none;
+  padding:14px;font-size:1rem;font-weight:600;cursor:pointer;
+  transition:opacity .2s;min-height:44px;
+}
+#contactForm button[type="submit"]:hover{opacity:.85;}
+#contactForm button[type="submit"]:disabled{opacity:.5;cursor:not-allowed;}
+.form-status{margin-top:12px;font-size:.875rem;min-height:1.3em;}
+.form-status.success{color:#4ade80;}
+.form-status.error{color:#f87171;}

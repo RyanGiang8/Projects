@@ -4,11 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ryan Giang — Photography Portfolio</title>
+<link rel="stylesheet" href="site.css">
 <style>
-  *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:#000;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
-  a{color:inherit;text-decoration:none;}
-
   header{padding:48px 24px 0;}
   header h1{font-size:2.5rem;letter-spacing:-0.02em;font-weight:600;}
   header p{color:#9ca3af;margin-top:8px;}
@@ -53,17 +50,6 @@
   }
   .photo:hover .overlay{opacity:1;}
 
-  footer{
-    padding:32px 24px;border-top:1px solid #1f2937;
-    display:flex;flex-direction:column;gap:16px;
-  }
-  footer .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
-  footer p{color:#6b7280;font-size:.875rem;}
-  footer .links{display:flex;gap:24px;}
-  footer .links a{color:#9ca3af;transition:color .2s;}
-  footer .links a:hover{color:#fff;}
-  @media(min-width:768px){ footer{padding:48px 48px;flex-direction:row;} }
-
   /* lightbox */
   #lightbox{
     position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;
@@ -74,10 +60,21 @@
   #lightbox .close{
     position:absolute;top:24px;right:24px;color:#fff;font-size:2rem;
     cursor:pointer;background:none;border:none;line-height:1;
+    padding:12px;min-width:44px;min-height:44px;
   }
+  #lightbox .close:focus-visible{outline:2px solid #fff;outline-offset:2px;}
 </style>
 </head>
 <body>
+
+<div class="sitenav">
+  <a href="index.html" class="brand">Ryan Giang</a>
+  <div class="sitenav-links">
+    <a href="index.html" class="current">Work</a>
+    <a href="about.html">About</a>
+    <button type="button" data-open-contact>Contact</button>
+  </div>
+</div>
 
 <header>
   <h1>Ryan Giang</h1>
@@ -98,7 +95,8 @@
     <div class="links">
       <a href="https://www.instagram.com/capitalcarz/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.linkedin.com/in/ryangiang/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="#">Contact</a>
+      <a href="about.html">About</a>
+      <button type="button" data-open-contact>Contact</button>
     </div>
   </div>
 </footer>
@@ -108,6 +106,25 @@
   <img id="lightboxImg" src="" alt="">
 </div>
 
+<div id="contactModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+  <div class="modal">
+    <button class="modal-close" id="contactClose" aria-label="Close contact form">&times;</button>
+    <h2 id="contactTitle">Get in Touch</h2>
+    <p class="modal-sub">Have a project in mind, or just want to say hi? Send a message below.</p>
+    <form id="contactForm" novalidate>
+      <label for="cf-name">Name</label>
+      <input type="text" id="cf-name" name="name" autocomplete="name" required>
+      <label for="cf-email">Email</label>
+      <input type="email" id="cf-email" name="email" autocomplete="email" required>
+      <label for="cf-message">Message</label>
+      <textarea id="cf-message" name="message" rows="5" required></textarea>
+      <button type="submit" id="cf-submit">Send Message</button>
+      <p class="form-status" id="cf-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</div>
+
+<script src="contact.js"></script>
 <script>
 function buildCategory(folder, files){
   return files.map((f, i) => ({
