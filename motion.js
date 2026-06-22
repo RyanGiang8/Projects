@@ -23,6 +23,12 @@
         navToggle.setAttribute('aria-expanded', 'false');
       });
     });
+    document.addEventListener('click', (e) => {
+      if (!navLinks.classList.contains('open')) return;
+      if (navLinks.contains(e.target) || navToggle.contains(e.target)) return;
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
   }
 
   /* ---- scroll progress bar ---- */

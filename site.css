@@ -61,16 +61,16 @@ body.custom-cursor-active button{cursor:none;}
 }
 .nav-toggle span{
   display:block;width:20px;height:2px;background:#fff;position:relative;
-  transition:transform .2s,opacity .2s;
+  transition:background .2s,transform .2s;
 }
 .nav-toggle span::before,
 .nav-toggle span::after{
   content:'';position:absolute;left:0;width:20px;height:2px;background:#fff;
-  transition:transform .2s,opacity .2s;
+  transition:transform .2s,top .2s;
 }
 .nav-toggle span::before{top:-6px;}
 .nav-toggle span::after{top:6px;}
-.nav-toggle[aria-expanded="true"] span{opacity:0;}
+.nav-toggle[aria-expanded="true"] span{background:transparent;}
 .nav-toggle[aria-expanded="true"] span::before{top:0;transform:rotate(45deg);}
 .nav-toggle[aria-expanded="true"] span::after{top:0;transform:rotate(-45deg);}
 
