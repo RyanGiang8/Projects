@@ -1,7 +1,7 @@
 /* Shared design system — Ryan Giang
    Used by every page (index, photography, projects). Edit here to change site-wide look. */
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap');
 
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -9,9 +9,33 @@ html{scroll-behavior:smooth;}
   html{scroll-behavior:auto;}
   *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important;}
 }
-body{background:#000;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6;}
+body{background:#000;color:#fff;font-family:'Source Sans 3',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6;}
 a{color:inherit;text-decoration:none;}
 img{max-width:100%;}
+
+/* scroll progress indicator */
+#scrollProgress{
+  position:fixed;top:0;left:0;height:2px;background:#fff;z-index:9999;
+  width:0%;transform-origin:left;pointer-events:none;
+}
+
+/* custom cursor (desktop, motion-enabled only — see motion.js) */
+body.custom-cursor-active,
+body.custom-cursor-active a,
+body.custom-cursor-active button{cursor:none;}
+.cursor-dot{
+  position:fixed;top:0;left:0;width:8px;height:8px;margin:-4px 0 0 -4px;background:#fff;
+  border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:difference;
+}
+.cursor-ring{
+  position:fixed;top:0;left:0;width:34px;height:34px;margin:-17px 0 0 -17px;
+  border:1px solid rgba(255,255,255,.45);border-radius:50%;pointer-events:none;z-index:9998;
+  transition:width .25s,height .25s,margin .25s,border-color .25s,background-color .25s;
+}
+.cursor-ring.cursor-hover{
+  width:54px;height:54px;margin:-27px 0 0 -27px;
+  background:rgba(255,255,255,.08);border-color:#fff;
+}
 
 /* top site nav, shared across pages */
 .sitenav{
@@ -76,19 +100,24 @@ footer button:focus-visible{
 }
 
 /* shared editorial components: section labels, reveal-on-scroll, spec grids, timeline */
-h1,h2,h3,.brand{font-family:'Space Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;}
+h1,h2,h3,.brand{font-family:'Lexend',-apple-system,BlinkMacSystemFont,sans-serif;}
 
 section{padding:64px 24px;border-top:1px solid #1f2937;}
 section .section-label{
   color:#6b7280;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;
   margin-bottom:28px;display:flex;align-items:center;gap:12px;
 }
-section .section-label .num{color:#374151;font-family:'Space Grotesk',sans-serif;}
+section .section-label .num{color:#374151;font-family:'Lexend',sans-serif;}
 section h2{font-size:1.9rem;font-weight:600;letter-spacing:-0.01em;margin-bottom:24px;max-width:640px;}
 @media(min-width:768px){ section{padding:88px 48px;} }
 
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);}
-.reveal.in{opacity:1;transform:translateY(0);}
+/* scroll-reveal: apply class="reveal" to a container — motion.js staggers each
+   direct child in as it enters the viewport. */
+.reveal-child{
+  opacity:0;transform:translateY(22px);
+  transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);
+}
+.reveal-child.in{opacity:1;transform:translateY(0);}
 
 .btn{
   display:inline-block;padding:15px 26px;font-size:.95rem;cursor:pointer;
@@ -121,7 +150,7 @@ section h2{font-size:1.9rem;font-weight:600;letter-spacing:-0.01em;margin-bottom
 }
 .timeline-item .year{
   color:#6b7280;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;
-  margin-bottom:8px;font-family:'Space Grotesk',sans-serif;
+  margin-bottom:8px;font-family:'Lexend',sans-serif;
 }
 .timeline-item h3{font-size:1.2rem;margin-bottom:8px;font-weight:600;}
 .timeline-item p{color:#9ca3af;font-size:.98rem;line-height:1.7;max-width:560px;}

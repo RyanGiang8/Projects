@@ -49,7 +49,7 @@
 </div>
 
 <section class="page-header">
-  <h1>Projects</h1>
+  <h1 data-parallax="0.1">Projects</h1>
   <p>A mix of photography, software, and tools I've built — most of it shipped with AI-assisted ("vibe coded") development.</p>
 </section>
 
@@ -174,18 +174,7 @@
 </div>
 
 <script src="contact.js"></script>
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script>
-
+<script src="motion.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

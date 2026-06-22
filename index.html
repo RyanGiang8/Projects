@@ -61,7 +61,7 @@
 <!-- ============ EDIT ME: HERO — swap the avatar placeholder below for a real headshot ============ -->
 <section class="hero">
   <div class="hero-layout">
-    <div class="avatar">
+    <div class="avatar" data-parallax="0.12">
       <!-- Replace this with: <img src="headshot.jpg" alt="Ryan Giang"> -->
       RG
     </div>
@@ -230,18 +230,7 @@
 </div>
 
 <script src="contact.js"></script>
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script>
-
+<script src="motion.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
