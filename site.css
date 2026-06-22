@@ -1,5 +1,7 @@
-/* Shared design system — Ryan Giang Photography
-   Used by index.html and about.html. Edit here to change site-wide look. */
+/* Shared design system — Ryan Giang
+   Used by every page (index, photography, projects). Edit here to change site-wide look. */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -72,6 +74,57 @@ footer a:focus-visible,
 footer button:focus-visible{
   outline:2px solid #fff;outline-offset:2px;
 }
+
+/* shared editorial components: section labels, reveal-on-scroll, spec grids, timeline */
+h1,h2,h3,.brand{font-family:'Space Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;}
+
+section{padding:64px 24px;border-top:1px solid #1f2937;}
+section .section-label{
+  color:#6b7280;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:28px;display:flex;align-items:center;gap:12px;
+}
+section .section-label .num{color:#374151;font-family:'Space Grotesk',sans-serif;}
+section h2{font-size:1.9rem;font-weight:600;letter-spacing:-0.01em;margin-bottom:24px;max-width:640px;}
+@media(min-width:768px){ section{padding:88px 48px;} }
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);}
+.reveal.in{opacity:1;transform:translateY(0);}
+
+.btn{
+  display:inline-block;padding:15px 26px;font-size:.95rem;cursor:pointer;
+  border:1px solid #374151;transition:background .2s,color .2s,border-color .2s,transform .15s;
+  min-height:44px;font-family:inherit;font-weight:500;
+}
+.btn:hover{transform:translateY(-1px);}
+.btn:active{transform:translateY(0);}
+.btn:focus-visible{outline:2px solid #fff;outline-offset:2px;}
+.btn-primary{background:#fff;color:#000;border-color:#fff;}
+.btn-primary:hover{background:#e5e7eb;}
+.btn-secondary{background:rgba(255,255,255,.05);color:#fff;backdrop-filter:blur(4px);}
+.btn-secondary:hover{border-color:#fff;background:rgba(255,255,255,.1);}
+
+.spec-grid{display:grid;grid-template-columns:1fr;gap:1px;max-width:960px;background:#1f2937;border:1px solid #1f2937;}
+@media(min-width:768px){ .spec-grid{grid-template-columns:repeat(3,1fr);} }
+.spec-group{background:#000;padding:28px 24px;transition:background .25s;}
+.spec-group:hover{background:#0a0a0a;}
+.spec-group h3{font-size:.95rem;margin-bottom:18px;color:#fff;font-weight:600;text-transform:uppercase;letter-spacing:.06em;}
+.spec-group ul{list-style:none;}
+.spec-group li{color:#9ca3af;font-size:.95rem;padding:9px 0;border-top:1px solid #1f2937;}
+.spec-group li:first-child{border-top:none;padding-top:0;}
+
+.timeline{max-width:760px;}
+.timeline-item{position:relative;padding-left:32px;padding-bottom:40px;border-left:1px solid #1f2937;}
+.timeline-item:last-child{padding-bottom:0;}
+.timeline-item::before{
+  content:'';position:absolute;left:-6px;top:4px;width:11px;height:11px;
+  border-radius:50%;background:#fff;box-shadow:0 0 0 4px #000;
+}
+.timeline-item .year{
+  color:#6b7280;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:8px;font-family:'Space Grotesk',sans-serif;
+}
+.timeline-item h3{font-size:1.2rem;margin-bottom:8px;font-weight:600;}
+.timeline-item p{color:#9ca3af;font-size:.98rem;line-height:1.7;max-width:560px;}
 
 #contactForm label{display:block;font-size:.8rem;color:#9ca3af;margin:16px 0 6px;}
 #contactForm label:first-of-type{margin-top:0;}

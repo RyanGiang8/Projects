@@ -3,66 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ryan Giang — Photography Portfolio</title>
+<title>Ryan Giang — Tax Analyst &amp; Accounting Professional</title>
 <link rel="stylesheet" href="site.css">
 <style>
-  header{padding:48px 24px 0;}
-  header h1{font-size:2.5rem;letter-spacing:-0.02em;font-weight:600;}
-  header p{color:#9ca3af;margin-top:8px;}
+  /* ---- EDIT ME: hero ---- */
+  .hero{min-height:auto;padding:64px 24px 56px;display:block;border-top:none;}
+  .hero-layout{display:flex;flex-direction:column;gap:36px;max-width:1000px;}
+  .avatar{
+    width:120px;height:120px;border-radius:50%;background:#111827;border:1px solid #1f2937;
+    display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:600;
+    color:#6b7280;flex-shrink:0;overflow:hidden;
+  }
+  .avatar img{width:100%;height:100%;object-fit:cover;display:block;}
+  .hero .eyebrow{
+    color:#6b7280;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;
+    margin-bottom:16px;display:flex;align-items:center;gap:10px;
+  }
+  .hero .eyebrow::before{content:'';width:24px;height:1px;background:#fff;display:inline-block;}
+  .hero h1{font-size:2.25rem;font-weight:600;letter-spacing:-0.02em;line-height:1.15;}
+  .hero .title{color:#d1d5db;margin-top:10px;font-size:1.1rem;}
+  .hero p{color:#9ca3af;margin-top:20px;font-size:1.05rem;max-width:600px;line-height:1.7;}
+  .hero .cta-row{display:flex;gap:16px;margin-top:32px;flex-wrap:wrap;}
   @media(min-width:768px){
-    header{padding:64px 48px 0;}
-    header h1{font-size:3.75rem;}
+    .hero{padding:88px 48px 72px;}
+    .hero-layout{flex-direction:row;align-items:flex-start;}
+    .hero h1{font-size:3rem;}
   }
 
-  nav{padding:0 24px;margin:32px 0;overflow-x:auto;}
-  nav .tabs{display:flex;gap:24px;border-bottom:1px solid #1f2937;min-width:max-content;}
-  nav button{
-    background:none;border:none;color:#6b7280;font-size:1rem;cursor:pointer;
-    padding:0 8px 16px;position:relative;transition:color .2s;white-space:nowrap;
-  }
-  nav button:hover{color:#d1d5db;}
-  nav button.active{color:#fff;}
-  nav button.active::after{
-    content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:#fff;
-  }
-  @media(min-width:768px){ nav{padding:0 48px;} }
+  /* ---- EDIT ME: bio ---- */
+  .bio-text p{color:#d1d5db;margin-bottom:18px;line-height:1.8;font-size:1.05rem;max-width:760px;}
+  .bio-text p:last-child{margin-bottom:0;}
 
-  main{padding:0 24px 48px;}
-  @media(min-width:768px){ main{padding:0 48px 48px;} }
+  /* ---- EDIT ME: education / certifications ---- */
+  .edu-item{max-width:640px;margin-bottom:24px;}
+  .edu-item:last-child{margin-bottom:0;}
+  .edu-item h3{font-size:1.1rem;font-weight:600;margin-bottom:6px;}
+  .edu-item .org{color:#9ca3af;font-size:.98rem;}
+  .edu-item .note{color:#6b7280;font-size:.9rem;margin-top:6px;}
 
-  .grid{column-count:1;column-gap:16px;}
-  @media(min-width:768px){ .grid{column-count:2;} }
-  @media(min-width:1024px){ .grid{column-count:3;} }
-
-  .photo{
-    position:relative;overflow:hidden;background:#111827;
-    cursor:pointer;margin-bottom:16px;break-inside:avoid;
-  }
-  .photo img{
-    width:100%;height:auto;display:block;
-    transition:transform .5s ease;
-  }
-  .photo:hover img{transform:scale(1.03);}
-  .photo .overlay{
-    position:absolute;inset:0;
-    background:linear-gradient(to top, rgba(0,0,0,.45), transparent 60%);
-    opacity:0;transition:opacity .3s;
-  }
-  .photo:hover .overlay{opacity:1;}
-
-  /* lightbox */
-  #lightbox{
-    position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;
-    align-items:center;justify-content:center;z-index:50;padding:24px;
-  }
-  #lightbox.open{display:flex;}
-  #lightbox img{max-width:100%;max-height:85vh;object-fit:contain;}
-  #lightbox .close{
-    position:absolute;top:24px;right:24px;color:#fff;font-size:2rem;
-    cursor:pointer;background:none;border:none;line-height:1;
-    padding:12px;min-width:44px;min-height:44px;
-  }
-  #lightbox .close:focus-visible{outline:2px solid #fff;outline-offset:2px;}
+  .cta-section{background:#0a0a0a;}
+  .cta-section h2{font-size:2.1rem;max-width:560px;}
+  .cta-section p{color:#9ca3af;margin:18px 0 32px;max-width:480px;font-size:1.05rem;}
 </style>
 </head>
 <body>
@@ -70,24 +51,152 @@
 <div class="sitenav">
   <a href="index.html" class="brand">Ryan Giang</a>
   <div class="sitenav-links">
-    <a href="index.html" class="current">Work</a>
-    <a href="about.html">About</a>
+    <a href="index.html" class="current">About</a>
+    <a href="photography.html">Photography</a>
+    <a href="projects.html">Projects</a>
     <button type="button" data-open-contact>Contact</button>
   </div>
 </div>
 
-<header>
-  <h1>Ryan Giang</h1>
-  <p>Photography Portfolio</p>
-</header>
+<!-- ============ EDIT ME: HERO — swap the avatar placeholder below for a real headshot ============ -->
+<section class="hero">
+  <div class="hero-layout">
+    <div class="avatar">
+      <!-- Replace this with: <img src="headshot.jpg" alt="Ryan Giang"> -->
+      RG
+    </div>
+    <div class="hero-content">
+      <p class="eyebrow">About</p>
+      <h1>Ryan Giang</h1>
+      <p class="title">Tax Analyst at Deloitte · Global Employer Services</p>
+      <p>
+        Fourth-year Bachelor of Commerce student specializing in Accounting at the
+        Sprott School of Business, Carleton University, pursuing my CPA designation
+        through a master's program. I'm currently a Tax Analyst on Deloitte's
+        Global Employer Services team, providing tax compliance and advisory
+        services to high-net-worth clients.
+      </p>
+      <div class="cta-row">
+        <button type="button" class="btn btn-primary" data-open-contact>Get in Touch</button>
+        <a href="https://www.linkedin.com/in/ryangiang/" target="_blank" rel="noopener" class="btn btn-secondary">Connect on LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-<nav>
-  <div class="tabs" id="tabs"></div>
-</nav>
+<!-- ============ EDIT ME: BIO ============ -->
+<section>
+  <p class="section-label"><span class="num">01</span> Bio</p>
+  <div class="bio-text reveal">
+    <p>
+      I'm a fourth-year Bachelor of Commerce student at the Sprott School of
+      Business at Carleton University, specializing in Accounting, and currently
+      working as a Tax Analyst on Deloitte's Global Employer Services team —
+      providing tax compliance and advisory services for high-net-worth clients.
+      I'm pursuing my CPA designation through a master's program, with a long-term
+      interest in personal finance, wealth management, and the technology shaping
+      how both are delivered.
+    </p>
+    <p>
+      Outside of tax season, I'm a working photographer — shooting automotive,
+      portrait, landscape, street, and astrophotography work since 2022 — and an
+      enthusiastic early adopter of agentic AI tools, which I use to design and
+      ship projects like this site. I bring the same attention to detail and
+      curiosity to every project, whether it's a client return, a balance sheet,
+      or a line of code.
+    </p>
+  </div>
+</section>
 
-<main>
-  <div class="grid" id="grid"></div>
-</main>
+<!-- ============ EDIT ME: EDUCATION ============ -->
+<section>
+  <p class="section-label"><span class="num">02</span> Education</p>
+  <h2>Academic Background</h2>
+  <div class="reveal">
+    <div class="edu-item">
+      <h3>Bachelor of Commerce — Accounting (Honours)</h3>
+      <p class="org">Sprott School of Business, Carleton University</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDIT ME: CERTIFICATIONS ============ -->
+<section>
+  <p class="section-label"><span class="num">03</span> Certifications</p>
+  <h2>Professional Designations</h2>
+  <div class="reveal">
+    <div class="edu-item">
+      <h3>Chartered Professional Accountant (CPA)</h3>
+      <p class="org">In Progress — pursuing designation through a master's program</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDIT ME: SKILLS / TOOLS ============ -->
+<section>
+  <p class="section-label"><span class="num">04</span> Skills &amp; Tools</p>
+  <h2>What I work with</h2>
+  <div class="spec-grid reveal">
+    <div class="spec-group">
+      <h3>Accounting &amp; Finance</h3>
+      <ul>
+        <li>Excel</li>
+        <li>QuickBooks</li>
+        <li>CCH TaxPrep</li>
+      </ul>
+    </div>
+    <div class="spec-group">
+      <h3>Productivity</h3>
+      <ul>
+        <li>Microsoft 365</li>
+        <li>Google Workspace</li>
+      </ul>
+    </div>
+    <div class="spec-group">
+      <h3>Technology &amp; AI</h3>
+      <ul>
+        <li>Claude &amp; Claude Code</li>
+        <li>Codex &amp; ChatGPT</li>
+        <li>HTML &amp; Vibe Coding</li>
+        <li>Adobe Suite</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDIT ME: EXPERIENCE / HIGHLIGHTS — fill in the [Year] and [Firm Name] placeholders ============ -->
+<section>
+  <p class="section-label"><span class="num">05</span> Experience</p>
+  <h2>Career Highlights</h2>
+  <div class="timeline reveal">
+    <div class="timeline-item">
+      <p class="year">[Year] — Present</p>
+      <h3>Tax Analyst, Global Employer Services</h3>
+      <p>Deloitte. Provide tax compliance and advisory services for high-net-worth clients.</p>
+    </div>
+    <div class="timeline-item">
+      <p class="year">[Year]</p>
+      <h3>Accountant</h3>
+      <p>[Firm Name], a local high-end interior design firm. Managed day-to-day bookkeeping and accounting.</p>
+    </div>
+    <div class="timeline-item">
+      <p class="year">2022 — Present</p>
+      <h3>Photographer</h3>
+      <p>Self-employed. Automotive, portrait, landscape, street, and astrophotography work for clients and personal projects.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDIT ME: CLOSING CTA ============ -->
+<section class="cta-section reveal">
+  <p class="section-label"><span class="num">06</span> Let's Talk</p>
+  <h2>Let's connect.</h2>
+  <p>Open to opportunities in accounting, tax, and finance — and always happy to talk personal finance, wealth management, or photography.</p>
+  <div class="cta-row" style="display:flex;gap:16px;flex-wrap:wrap;">
+    <button type="button" class="btn btn-primary" data-open-contact>Get in Touch</button>
+    <a href="https://www.linkedin.com/in/ryangiang/" target="_blank" rel="noopener" class="btn btn-secondary">Connect on LinkedIn</a>
+  </div>
+</section>
 
 <footer>
   <div class="row">
@@ -95,22 +204,18 @@
     <div class="links">
       <a href="https://www.instagram.com/capitalcarz/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.linkedin.com/in/ryangiang/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="about.html">About</a>
+      <a href="photography.html">Photography</a>
+      <a href="projects.html">Projects</a>
       <button type="button" data-open-contact>Contact</button>
     </div>
   </div>
 </footer>
 
-<div id="lightbox">
-  <button class="close" id="lightboxClose">&times;</button>
-  <img id="lightboxImg" src="" alt="">
-</div>
-
 <div id="contactModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
   <div class="modal">
     <button class="modal-close" id="contactClose" aria-label="Close contact form">&times;</button>
     <h2 id="contactTitle">Get in Touch</h2>
-    <p class="modal-sub">Have a project in mind, or just want to say hi? Send a message below.</p>
+    <p class="modal-sub">Have an opportunity, a project, or just want to connect? Send a message below.</p>
     <form id="contactForm" novalidate>
       <label for="cf-name">Name</label>
       <input type="text" id="cf-name" name="name" autocomplete="name" required>
@@ -126,73 +231,15 @@
 
 <script src="contact.js"></script>
 <script>
-function buildCategory(folder, files){
-  return files.map((f, i) => ({
-    url: `Media/${folder}/${f}`,
-    alt: `${folder} photography ${i + 1}`
-  }));
-}
-
-/* AUTO-GENERATED:START — do not hand-edit; run `python3 update_media.py` instead */
-const photosByCategory = {
-  automotive: buildCategory('Automotive', ['DSC00199.JPG','DSC00270.JPG','DSC00327.JPG','DSC00338.JPG','DSC00390.jpg','DSC00539.jpg','DSC00573.jpg','DSC00634.jpg','DSC00797.JPG','DSC00799.JPG','DSC00920.JPG','DSC00963.JPG','DSC00974.jpg','DSC01032.JPG','DSC01062.jpg','DSC01113.jpg','DSC01158.jpg','DSC01185.JPG','DSC01203.jpg','DSC01233.JPG','DSC01317.jpg','DSC09777-2.jpg','DSC09794.jpg','DSC09891.jpg','DSC09936.jpg','DSC_5058.jpg','DSC_5182.jpg','DSC_5220.jpg','DSC_5237.jpg','DSC_5304.jpg']),
-  landscape: buildCategory('Landscape', ['DSC00134.jpg','DSC00153.jpg','DSC00222.jpg','DSC03253.jpg','DSC03267.jpg','DSC03425.jpg','DSC03487.jpg','DSC09953-2.jpg']),
-  astrophotography: buildCategory('Astrophotography', ['DSC00030-2.jpg','DSC00030-3.jpg','DSC00031.jpg','DSC00032.jpg','DSC00046.jpg','DSC00048.jpg']),
-  portrait: buildCategory('Portrait', ['DSC02323.jpg','DSC05469.jpg','DSC06104-Enhanced-NR.jpg','DSC06140-Enhanced-NR.jpg','DSC06614.jpg','DSC07608.jpg']),
-  street: buildCategory('Street', ['DSC00146.jpg','DSC00183.jpg','DSC00249.jpg','DSC00255.jpg','DSC00286.jpg','DSC00287.jpg','DSC00292.jpg','DSC00300.jpg','DSC00324.jpg','DSC02320.jpg','DSC02462.jpg','DSC02556.jpg','DSC02613.jpg','DSC02645.jpg','DSC02668.jpg','DSC02753.jpg','DSC02829.jpg','DSC07735.jpg','DSC08183.jpg','DSC08310.jpg','DSC08921.jpg','DSC08949.jpg']),
-  corporate: buildCategory('Corporate', ['DSC00406.jpg','DSC00573.jpg','DSC00961.jpg','DSC03357.jpg','DSC03368.jpg','DSC07735.jpg','DSC08949.jpg','DSC09900.jpg'])
-};
-
-const tabs = [
-  { id:'automotive', label:'Automotive' },
-  { id:'landscape', label:'Landscape' },
-  { id:'astrophotography', label:'Astrophotography' },
-  { id:'portrait', label:'Portrait' },
-  { id:'street', label:'Street' },
-  { id:'corporate', label:'Corporate' }
-];
-/* AUTO-GENERATED:END */
-
-let activeCategory = 'automotive';
-
-function render(){
-  const tabsEl = document.getElementById('tabs');
-  tabsEl.innerHTML = tabs.map(t =>
-    `<button class="${t.id===activeCategory?'active':''}" data-id="${t.id}">${t.label}</button>`
-  ).join('');
-  tabsEl.querySelectorAll('button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      activeCategory = btn.dataset.id;
-      render();
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
     });
-  });
-
-  const gridEl = document.getElementById('grid');
-  gridEl.innerHTML = photosByCategory[activeCategory].map((photo, i) => `
-    <div class="photo" data-cat="${activeCategory}" data-idx="${i}">
-      <img src="${photo.url}" alt="${photo.alt}" loading="lazy">
-      <div class="overlay"></div>
-    </div>
-  `).join('');
-  gridEl.querySelectorAll('.photo').forEach(el => {
-    el.addEventListener('click', () => {
-      const photo = photosByCategory[el.dataset.cat][el.dataset.idx];
-      openLightbox(photo);
-    });
-  });
-}
-
-const lightbox = document.getElementById('lightbox');
-function openLightbox(photo){
-  document.getElementById('lightboxImg').src = photo.url;
-  document.getElementById('lightboxImg').alt = photo.alt;
-  lightbox.classList.add('open');
-}
-document.getElementById('lightboxClose').addEventListener('click', () => lightbox.classList.remove('open'));
-lightbox.addEventListener('click', (e) => { if(e.target===lightbox) lightbox.classList.remove('open'); });
-document.addEventListener('keydown', (e) => { if(e.key==='Escape') lightbox.classList.remove('open'); });
-
-render();
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 
 <script defer src="/_vercel/insights/script.js"></script>

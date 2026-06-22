@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ryan Giang — Photography Portfolio</title>
+<link rel="stylesheet" href="site.css">
+<style>
+  header{padding:48px 24px 0;}
+  header h1{font-size:2.5rem;letter-spacing:-0.02em;font-weight:600;}
+  header p{color:#9ca3af;margin-top:8px;}
+  @media(min-width:768px){
+    header{padding:64px 48px 0;}
+    header h1{font-size:3.75rem;}
+  }
+
+  nav{padding:0 24px;margin:32px 0;overflow-x:auto;}
+  nav .tabs{display:flex;gap:24px;border-bottom:1px solid #1f2937;min-width:max-content;}
+  nav button{
+    background:none;border:none;color:#6b7280;font-size:1rem;cursor:pointer;
+    padding:0 8px 16px;position:relative;transition:color .2s;white-space:nowrap;
+  }
+  nav button:hover{color:#d1d5db;}
+  nav button.active{color:#fff;}
+  nav button.active::after{
+    content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:#fff;
+  }
+  @media(min-width:768px){ nav{padding:0 48px;} }
+
+  main{padding:0 24px 48px;}
+  @media(min-width:768px){ main{padding:0 48px 48px;} }
+
+  .grid{column-count:1;column-gap:16px;}
+  @media(min-width:768px){ .grid{column-count:2;} }
+  @media(min-width:1024px){ .grid{column-count:3;} }
+
+  .photo{
+    position:relative;overflow:hidden;background:#111827;
+    cursor:pointer;margin-bottom:16px;break-inside:avoid;
+  }
+  .photo img{
+    width:100%;height:auto;display:block;
+    transition:transform .5s ease;
+  }
+  .photo:hover img{transform:scale(1.03);}
+  .photo .overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(to top, rgba(0,0,0,.45), transparent 60%);
+    opacity:0;transition:opacity .3s;
+  }
+  .photo:hover .overlay{opacity:1;}
+
+  /* lightbox */
+  #lightbox{
+    position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;
+    align-items:center;justify-content:center;z-index:50;padding:24px;
+  }
+  #lightbox.open{display:flex;}
+  #lightbox img{max-width:100%;max-height:85vh;object-fit:contain;}
+  #lightbox .close{
+    position:absolute;top:24px;right:24px;color:#fff;font-size:2rem;
+    cursor:pointer;background:none;border:none;line-height:1;
+    padding:12px;min-width:44px;min-height:44px;
+  }
+  #lightbox .close:focus-visible{outline:2px solid #fff;outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<div class="sitenav">
+  <a href="index.html" class="brand">Ryan Giang</a>
+  <div class="sitenav-links">
+    <a href="index.html">About</a>
+    <a href="photography.html" class="current">Photography</a>
+    <a href="projects.html">Projects</a>
+    <button type="button" data-open-contact>Contact</button>
+  </div>
+</div>
+
+<header>
+  <h1>Ryan Giang</h1>
+  <p>Photography Portfolio</p>
+</header>
+
+<nav>
+  <div class="tabs" id="tabs"></div>
+</nav>
+
+<main>
+  <div class="grid" id="grid"></div>
+</main>
+
+<!-- ============ EDIT ME: GEAR ============ -->
+<section id="equipment">
+  <p class="section-label">Equipment</p>
+  <h2>What I shoot with</h2>
+  <div class="spec-grid">
+    <div class="spec-group">
+      <h3>Camera Bodies</h3>
+      <ul>
+        <li>Sony A7III</li>
+        <li>Nikon D2XS</li>
+      </ul>
+    </div>
+    <div class="spec-group">
+      <h3>Lenses</h3>
+      <ul>
+        <li>Sigma 24-70mm F2.8 ART</li>
+        <li>Sony 16mm F1.8 G</li>
+        <li>Sony 35mm F1.8</li>
+      </ul>
+    </div>
+    <div class="spec-group">
+      <h3>Other Gear</h3>
+      <ul>
+        <li>ProMist Filters</li>
+        <li>NiSi Variable ND Filters</li>
+        <li>Polarizers</li>
+        <li>Vanguard VEO 2S Tripod</li>
+        <li>Rode VideoMic Pro+</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="row">
+    <p>&copy; 2026 Ryan Giang. All rights reserved.</p>
+    <div class="links">
+      <a href="https://www.instagram.com/capitalcarz/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.linkedin.com/in/ryangiang/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="index.html">About</a>
+      <a href="projects.html">Projects</a>
+      <button type="button" data-open-contact>Contact</button>
+    </div>
+  </div>
+</footer>
+
+<div id="lightbox">
+  <button class="close" id="lightboxClose">&times;</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<div id="contactModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+  <div class="modal">
+    <button class="modal-close" id="contactClose" aria-label="Close contact form">&times;</button>
+    <h2 id="contactTitle">Get in Touch</h2>
+    <p class="modal-sub">Have a project in mind, or just want to say hi? Send a message below.</p>
+    <form id="contactForm" novalidate>
+      <label for="cf-name">Name</label>
+      <input type="text" id="cf-name" name="name" autocomplete="name" required>
+      <label for="cf-email">Email</label>
+      <input type="email" id="cf-email" name="email" autocomplete="email" required>
+      <label for="cf-message">Message</label>
+      <textarea id="cf-message" name="message" rows="5" required></textarea>
+      <button type="submit" id="cf-submit">Send Message</button>
+      <p class="form-status" id="cf-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</div>
+
+<script src="contact.js"></script>
+<script>
+function buildCategory(folder, files){
+  return files.map((f, i) => ({
+    url: `Media/${folder}/${f}`,
+    alt: `${folder} photography ${i + 1}`
+  }));
+}
+
+/* AUTO-GENERATED:START — do not hand-edit; run `python3 update_media.py` instead */
+const photosByCategory = {
+  automotive: buildCategory('Automotive', ['DSC00199.JPG','DSC00270.JPG','DSC00327.JPG','DSC00338.JPG','DSC00390.jpg','DSC00539.jpg','DSC00573.jpg','DSC00634.jpg','DSC00797.JPG','DSC00799.JPG','DSC00920.JPG','DSC00963.JPG','DSC00974.jpg','DSC01032.JPG','DSC01062.jpg','DSC01113.jpg','DSC01158.jpg','DSC01185.JPG','DSC01203.jpg','DSC01233.JPG','DSC01317.jpg','DSC09777-2.jpg','DSC09794.jpg','DSC09891.jpg','DSC09936.jpg','DSC_5058.jpg','DSC_5182.jpg','DSC_5220.jpg','DSC_5237.jpg','DSC_5304.jpg']),
+  landscape: buildCategory('Landscape', ['DSC00134.jpg','DSC00153.jpg','DSC00222.jpg','DSC03253.jpg','DSC03267.jpg','DSC03425.jpg','DSC03487.jpg','DSC09953-2.jpg']),
+  astrophotography: buildCategory('Astrophotography', ['DSC00030-2.jpg','DSC00030-3.jpg','DSC00031.jpg','DSC00032.jpg','DSC00046.jpg','DSC00048.jpg']),
+  portrait: buildCategory('Portrait', ['DSC02323.jpg','DSC05469.jpg','DSC06104-Enhanced-NR.jpg','DSC06140-Enhanced-NR.jpg','DSC06614.jpg','DSC07608.jpg']),
+  street: buildCategory('Street', ['DSC00146.jpg','DSC00183.jpg','DSC00249.jpg','DSC00255.jpg','DSC00286.jpg','DSC00287.jpg','DSC00292.jpg','DSC00300.jpg','DSC00324.jpg','DSC02320.jpg','DSC02462.jpg','DSC02556.jpg','DSC02613.jpg','DSC02645.jpg','DSC02668.jpg','DSC02753.jpg','DSC02829.jpg','DSC07735.jpg','DSC08183.jpg','DSC08310.jpg','DSC08921.jpg','DSC08949.jpg']),
+  corporate: buildCategory('Corporate', ['DSC00406.jpg','DSC00573.jpg','DSC00961.jpg','DSC03357.jpg','DSC03368.jpg','DSC07735.jpg','DSC08949.jpg','DSC09900.jpg'])
+};
+
+const tabs = [
+  { id:'automotive', label:'Automotive' },
+  { id:'landscape', label:'Landscape' },
+  { id:'astrophotography', label:'Astrophotography' },
+  { id:'portrait', label:'Portrait' },
+  { id:'street', label:'Street' },
+  { id:'corporate', label:'Corporate' }
+];
+/* AUTO-GENERATED:END */
+
+let activeCategory = 'automotive';
+
+function render(){
+  const tabsEl = document.getElementById('tabs');
+  tabsEl.innerHTML = tabs.map(t =>
+    `<button class="${t.id===activeCategory?'active':''}" data-id="${t.id}">${t.label}</button>`
+  ).join('');
+  tabsEl.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeCategory = btn.dataset.id;
+      render();
+    });
+  });
+
+  const gridEl = document.getElementById('grid');
+  gridEl.innerHTML = photosByCategory[activeCategory].map((photo, i) => `
+    <div class="photo" data-cat="${activeCategory}" data-idx="${i}">
+      <img src="${photo.url}" alt="${photo.alt}" loading="lazy">
+      <div class="overlay"></div>
+    </div>
+  `).join('');
+  gridEl.querySelectorAll('.photo').forEach(el => {
+    el.addEventListener('click', () => {
+      const photo = photosByCategory[el.dataset.cat][el.dataset.idx];
+      openLightbox(photo);
+    });
+  });
+}
+
+const lightbox = document.getElementById('lightbox');
+function openLightbox(photo){
+  document.getElementById('lightboxImg').src = photo.url;
+  document.getElementById('lightboxImg').alt = photo.alt;
+  lightbox.classList.add('open');
+}
+document.getElementById('lightboxClose').addEventListener('click', () => lightbox.classList.remove('open'));
+lightbox.addEventListener('click', (e) => { if(e.target===lightbox) lightbox.classList.remove('open'); });
+document.addEventListener('keydown', (e) => { if(e.key==='Escape') lightbox.classList.remove('open'); });
+
+render();
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

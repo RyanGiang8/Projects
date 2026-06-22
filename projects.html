@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Ryan Giang</title>
+<link rel="stylesheet" href="site.css">
+<style>
+  .page-header{padding:64px 24px 0;border-top:none;}
+  .page-header h1{font-size:2.25rem;font-weight:600;letter-spacing:-0.02em;}
+  .page-header p{color:#9ca3af;margin-top:12px;font-size:1.05rem;max-width:600px;}
+  @media(min-width:768px){ .page-header{padding:88px 48px 0;} .page-header h1{font-size:3rem;} }
+
+  .projects-list{display:flex;flex-direction:column;gap:1px;background:#1f2937;}
+  .project-card{background:#000;padding:36px 24px;display:grid;grid-template-columns:1fr;gap:20px;}
+  @media(min-width:768px){
+    .projects-list{margin:0 48px;}
+    .project-card{padding:48px 0;grid-template-columns:200px 1fr;gap:40px;}
+  }
+  .project-card .meta{color:#6b7280;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;}
+  .project-card h2{font-size:1.5rem;font-weight:600;letter-spacing:-0.01em;margin:8px 0 14px;}
+  .project-card p{color:#9ca3af;font-size:1rem;line-height:1.7;max-width:620px;}
+  .project-card ul{list-style:none;margin-top:14px;color:#9ca3af;font-size:.95rem;}
+  .project-card ul li{padding:4px 0;position:relative;padding-left:16px;}
+  .project-card ul li::before{content:'—';position:absolute;left:0;color:#4b5563;}
+  .tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+  .tag{
+    font-size:.78rem;color:#d1d5db;border:1px solid #1f2937;padding:5px 12px;
+    border-radius:999px;letter-spacing:.02em;
+  }
+  .project-card .cta-row{margin-top:22px;}
+  .badge-soon{
+    font-size:.78rem;color:#6b7280;border:1px solid #1f2937;padding:5px 12px;
+    border-radius:999px;display:inline-block;margin-top:22px;
+  }
+  @media(max-width:767px){ .projects-list{padding:0 24px;} }
+</style>
+</head>
+<body>
+
+<div class="sitenav">
+  <a href="index.html" class="brand">Ryan Giang</a>
+  <div class="sitenav-links">
+    <a href="index.html">About</a>
+    <a href="photography.html">Photography</a>
+    <a href="projects.html" class="current">Projects</a>
+    <button type="button" data-open-contact>Contact</button>
+  </div>
+</div>
+
+<section class="page-header">
+  <h1>Projects</h1>
+  <p>A mix of photography, software, and tools I've built — most of it shipped with AI-assisted ("vibe coded") development.</p>
+</section>
+
+<section style="border-top:none;padding-top:40px;">
+  <div class="projects-list">
+
+    <!-- ============ EDIT ME: project 1 ============ -->
+    <div class="project-card reveal">
+      <div class="meta">01 — Photography</div>
+      <div>
+        <h2>Photography Portfolio</h2>
+        <p>
+          A dark, editorial photography portfolio showcasing automotive, landscape,
+          astrophotography, portrait, street, and corporate work — with a masonry
+          grid, lightbox viewer, and category filtering.
+        </p>
+        <ul>
+          <li>Masonry photo grid with category tabs and lightbox</li>
+          <li>Auto-compressed, full-resolution images served from a Python build script</li>
+          <li>Functional contact form with mailto fallback</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Python</span>
+        </div>
+        <div class="cta-row">
+          <a href="photography.html" class="btn btn-primary">View Project</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ EDIT ME: project 2 ============ -->
+    <div class="project-card reveal">
+      <div class="meta">02 — Personal Finance</div>
+      <div>
+        <h2>Finance &amp; Investments Tracker</h2>
+        <p>
+          A personal finance and investment dashboard for tracking net worth,
+          budgets, and portfolio performance — built as a single self-contained
+          app with no backend, storing all data locally in CAD.
+        </p>
+        <ul>
+          <li>Interactive charts for net worth, budgets, and investment performance</li>
+          <li>Local-first data storage (no account or server required)</li>
+          <li>Dark, data-dense dashboard UI</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Chart.js</span>
+        </div>
+        <div class="cta-row">
+          <a href="finance-app.html" class="btn btn-primary">View Project</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ EDIT ME: project 3 ============ -->
+    <div class="project-card reveal">
+      <div class="meta">03 — Health &amp; Fitness</div>
+      <div>
+        <h2>Vantage — Workout &amp; Nutrition PWA</h2>
+        <p>
+          An all-in-one, mobile-first progressive web app for training and
+          nutrition: an interactive muscle map that recommends exercises, a fast
+          workout logger with PR detection, an autoregulated mesocycle planner,
+          and nutrition tracking with AI photo/text calorie estimation. Offline-first —
+          your data stays on-device.
+        </p>
+        <ul>
+          <li>Interactive front/back muscle map with ranked exercise recommendations</li>
+          <li>Workout logger with PR detection and volume-landmark gauges</li>
+          <li>AI-powered photo/text calorie estimation grounded in a real food database</li>
+          <li>Installable PWA, offline-first with on-device storage (IndexedDB)</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag">React</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">Vite</span>
+          <span class="tag">Tailwind CSS</span>
+          <span class="tag">Zustand</span>
+          <span class="tag">Express</span>
+        </div>
+        <span class="badge-soon">Not yet deployed</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="row">
+    <p>&copy; 2026 Ryan Giang. All rights reserved.</p>
+    <div class="links">
+      <a href="https://www.instagram.com/capitalcarz/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.linkedin.com/in/ryangiang/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="index.html">About</a>
+      <button type="button" data-open-contact>Contact</button>
+    </div>
+  </div>
+</footer>
+
+<div id="contactModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+  <div class="modal">
+    <button class="modal-close" id="contactClose" aria-label="Close contact form">&times;</button>
+    <h2 id="contactTitle">Get in Touch</h2>
+    <p class="modal-sub">Have a project in mind, or just want to say hi? Send a message below.</p>
+    <form id="contactForm" novalidate>
+      <label for="cf-name">Name</label>
+      <input type="text" id="cf-name" name="name" autocomplete="name" required>
+      <label for="cf-email">Email</label>
+      <input type="email" id="cf-email" name="email" autocomplete="email" required>
+      <label for="cf-message">Message</label>
+      <textarea id="cf-message" name="message" rows="5" required></textarea>
+      <button type="submit" id="cf-submit">Send Message</button>
+      <p class="form-status" id="cf-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</div>
+
+<script src="contact.js"></script>
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
