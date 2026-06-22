@@ -9,6 +9,22 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = window.matchMedia('(pointer: fine)').matches;
 
+  /* ---- mobile nav toggle ---- */
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.sitenav-links');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    navLinks.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
   /* ---- scroll progress bar ---- */
   const bar = document.createElement('div');
   bar.id = 'scrollProgress';

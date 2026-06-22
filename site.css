@@ -40,7 +40,7 @@ body.custom-cursor-active button{cursor:none;}
 /* top site nav, shared across pages */
 .sitenav{
   display:flex;justify-content:space-between;align-items:center;
-  padding:20px 24px;border-bottom:1px solid #1f2937;
+  padding:16px 20px;border-bottom:1px solid #1f2937;position:relative;
 }
 .sitenav .brand{font-size:1.05rem;font-weight:600;letter-spacing:-0.01em;cursor:pointer;}
 .sitenav .sitenav-links{display:flex;gap:28px;font-size:.95rem;}
@@ -52,7 +52,44 @@ body.custom-cursor-active button{cursor:none;}
 .sitenav .sitenav-links a:hover,
 .sitenav .sitenav-links button:hover{color:#fff;}
 .sitenav .sitenav-links a.current{color:#fff;}
-@media(min-width:768px){ .sitenav{padding:24px 48px;} }
+
+/* mobile nav: hide the brand wordmark, collapse links behind a hamburger toggle */
+.nav-toggle{
+  display:flex;align-items:center;justify-content:center;
+  width:44px;height:44px;background:none;border:none;cursor:pointer;
+  margin-left:auto;
+}
+.nav-toggle span{
+  display:block;width:20px;height:2px;background:#fff;position:relative;
+  transition:transform .2s,opacity .2s;
+}
+.nav-toggle span::before,
+.nav-toggle span::after{
+  content:'';position:absolute;left:0;width:20px;height:2px;background:#fff;
+  transition:transform .2s,opacity .2s;
+}
+.nav-toggle span::before{top:-6px;}
+.nav-toggle span::after{top:6px;}
+.nav-toggle[aria-expanded="true"] span{opacity:0;}
+.nav-toggle[aria-expanded="true"] span::before{top:0;transform:rotate(45deg);}
+.nav-toggle[aria-expanded="true"] span::after{top:0;transform:rotate(-45deg);}
+
+@media(max-width:767px){
+  .sitenav .brand{display:none;}
+  .nav-toggle{display:flex;}
+  .sitenav .sitenav-links{
+    display:none;position:absolute;top:100%;left:0;right:0;z-index:40;
+    flex-direction:column;gap:2px;background:#000;border-bottom:1px solid #1f2937;
+    padding:8px 20px 16px;
+  }
+  .sitenav .sitenav-links.open{display:flex;}
+  .sitenav .sitenav-links a,
+  .sitenav .sitenav-links button{padding:14px 2px;text-align:left;}
+}
+@media(min-width:768px){
+  .sitenav{padding:24px 48px;}
+  .nav-toggle{display:none;}
+}
 
 /* footer, shared across pages */
 footer{

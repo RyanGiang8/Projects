@@ -32,8 +32,15 @@
 
   /* ---- EDIT ME: bio ---- */
   .bio-layout{display:grid;grid-template-columns:1fr;gap:36px;align-items:stretch;}
+  .bio-text{min-width:0;}
   .bio-text p{color:#d1d5db;margin-bottom:18px;line-height:1.8;font-size:1.05rem;max-width:760px;}
   .bio-text p:last-child{margin-bottom:0;}
+  .bio-text .p-short{display:none;}
+  @media(max-width:600px){
+    .bio-text p{font-size:.98rem;line-height:1.7;}
+    .bio-text .p-full{display:none;}
+    .bio-text .p-short{display:block;}
+  }
 
   /* desktop-only photo collage — swap these for any of your own shots */
   .bio-collage{display:none;}
@@ -90,7 +97,8 @@
 
 <div class="sitenav">
   <a href="index.html" class="brand">Ryan Giang</a>
-  <div class="sitenav-links">
+  <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="siteNavLinks"><span></span></button>
+  <div class="sitenav-links" id="siteNavLinks">
     <a href="index.html" class="current">About</a>
     <a href="photography.html">Photography</a>
     <a href="projects.html">Projects</a>
@@ -137,13 +145,18 @@
         interest in personal finance, wealth management, and the technology shaping
         how both are delivered.
       </p>
-      <p>
+      <p class="p-full">
         Outside of tax season, I'm a working photographer — shooting automotive,
         portrait, landscape, street, and astrophotography work since 2022 — and an
         enthusiastic early adopter of agentic AI tools, which I use to design and
         ship projects like this site. I bring the same attention to detail and
         curiosity to every project, whether it's a client return, a balance sheet,
         or a line of code.
+      </p>
+      <p class="p-short">
+        Outside of tax season, I'm a working photographer since 2022 and an early
+        adopter of agentic AI tools — the same curiosity and attention to detail
+        I bring to every project, client return or line of code.
       </p>
       <div class="bio-facts" aria-hidden="false">
         <div class="fact">
