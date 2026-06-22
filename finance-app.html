@@ -1,7 +1,9 @@
-<!-- Personal Finance & Investment App
+<!-- Personal Finance & Investment App — Final V1
      Built with: Vanilla JS + Chart.js
-     Data: localStorage (CAD)
-     Last updated: 2026-06-18
+     Data: localStorage (CAD), private to this browser
+     Features: Start Here guide, Dashboard, Transactions, Budgets,
+               Investments, Calculators, Reports, light/dark theme
+     Last updated: 2026-06-21
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -67,9 +69,16 @@
   .nav-item{display:flex;align-items:center;gap:11px;padding:11px 12px;margin:2px 0;color:var(--text2);cursor:pointer;border-radius:10px;font-size:14px;font-weight:500;transition:background .15s,color .15s;}
   .nav-item:hover{color:var(--text);background:var(--surface-2);}
   .nav-item.active{color:var(--green);background:var(--accent-weak);font-weight:600;}
-  .nav-foot{margin-top:auto;display:flex;flex-direction:column;gap:2px;padding-top:12px;border-top:1px solid var(--border);}
+  .nav-foot{margin-top:22px;display:flex;flex-direction:column;gap:2px;padding-top:18px;border-top:1px solid var(--border);}
+  .nav-back{text-decoration:none;color:var(--text2);}
+  .nav-back:hover{color:var(--green);}
   .sidebar-footer{padding:11px 12px;display:flex;align-items:center;gap:11px;color:var(--text2);cursor:pointer;font-size:14px;font-weight:500;border-radius:10px;transition:background .15s,color .15s;}
   .sidebar-footer:hover{color:var(--text);background:var(--surface-2);}
+  .theme-row{justify-content:space-between;}
+  .switch{position:relative;width:38px;height:22px;border-radius:11px;background:var(--border-strong);transition:background .2s;flex-shrink:0;}
+  .switch .knob{position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3);transition:left .2s;}
+  .switch.on{background:var(--green);}
+  .switch.on .knob{left:18px;}
   #hamburger{display:none;}
 
   main{flex:1;padding:34px 44px;overflow-x:hidden;}
@@ -81,6 +90,28 @@
   .range-pill{background:transparent;border:none;color:var(--text2);font-size:11.5px;font-weight:600;padding:5px 10px;border-radius:7px;cursor:pointer;transition:background .15s,color .15s;}
   .range-pill:hover{color:var(--text);}
   .range-pill.active{background:var(--surface);color:var(--green);box-shadow:var(--shadow);}
+
+  /* Start Here page */
+  .lead{color:var(--text2);font-size:15px;line-height:1.65;max-width:720px;margin:0 0 22px;}
+  .start-note{display:flex;gap:11px;align-items:flex-start;background:rgba(188,133,25,.12);border:1px solid rgba(188,133,25,.32);border-radius:12px;padding:13px 16px;margin:0 0 24px;font-size:13.5px;line-height:1.55;color:var(--text);max-width:760px;}
+  .start-note b{font-weight:600;}
+  .start-title{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--text2);font-weight:600;margin-bottom:16px;}
+  .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  @media (max-width:900px){.feature-grid{grid-template-columns:1fr;}}
+  .feature{display:flex;gap:13px;align-items:flex-start;}
+  .feature .fi{font-size:22px;line-height:1.1;flex-shrink:0;}
+  .feature h4{font-size:15px;margin-bottom:4px;}
+  .feature p{color:var(--text2);font-size:13px;line-height:1.5;margin:0;}
+  .step-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;}
+  .step-list li{display:flex;gap:14px;align-items:flex-start;}
+  .step-list p{margin:0;font-size:14px;line-height:1.55;}
+  .step-list b{color:var(--text);}
+  .step-num{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--accent-weak);color:var(--green);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+  .callout{display:flex;gap:16px;align-items:flex-start;border-left:3px solid var(--green);background:var(--accent-weak);}
+  .callout .ci{font-size:26px;line-height:1;flex-shrink:0;}
+  .callout h4{margin-bottom:8px;font-size:16px;}
+  .callout p{color:var(--text2);font-size:13.5px;line-height:1.6;margin:0 0 9px;}
+  .callout p:last-child{margin-bottom:0;}
 
   .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);}
   .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:20px;}
@@ -156,6 +187,7 @@
     #sidebar{position:fixed;left:-260px;top:0;height:100%;z-index:50;transition:left .2s;box-shadow:var(--shadow-hover);}
     #sidebar.open{left:0;}
     #hamburger{display:block;position:fixed;top:16px;left:16px;z-index:60;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:9px 13px;border-radius:10px;box-shadow:var(--shadow);}
+    #hamburger.menu-open{display:none;}
     main{padding:74px 18px 28px;}
     .grid4{grid-template-columns:1fr 1fr;}
     .sidebar-overlay.open{display:block;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:40;}
@@ -171,6 +203,7 @@
 <div id="app">
   <div id="sidebar">
     <div class="brand">Ledger<span>.</span><small>Personal Finance</small></div>
+    <div class="nav-item" data-section="startHere">✨ Start Here</div>
     <div class="nav-item" data-section="dashboard">📊 Dashboard</div>
     <div class="nav-item" data-section="transactions">💳 Transactions</div>
     <div class="nav-item" data-section="budgets">🎯 Budgets</div>
@@ -178,7 +211,11 @@
     <div class="nav-item" data-section="calculators">🧮 Calculators</div>
     <div class="nav-item" data-section="reports">🗒️ Reports</div>
     <div class="nav-foot">
-      <div class="sidebar-footer" id="themeBtn">🌙 Dark mode</div>
+      <a href="index.html" class="sidebar-footer nav-back">↩ Back to Portfolio</a>
+      <div class="sidebar-footer theme-row" id="themeBtn">
+        <span>🌙 Dark mode</span>
+        <span class="switch" id="themeSwitch"><span class="knob"></span></span>
+      </div>
       <div class="sidebar-footer" id="settingsBtn">⚙️ Settings</div>
     </div>
   </div>
@@ -210,8 +247,8 @@ function refreshChartColors(){
 }
 function updateThemeBtn(){
   const dark = document.documentElement.getAttribute('data-theme')==='dark';
-  const btn = document.getElementById('themeBtn');
-  if(btn) btn.textContent = dark ? '☀️ Light mode' : '🌙 Dark mode';
+  const sw = document.getElementById('themeSwitch');
+  if(sw) sw.classList.toggle('on', dark);
 }
 function applyTheme(theme){
   document.documentElement.setAttribute('data-theme', theme);
@@ -334,7 +371,7 @@ function chartFontDefaults(){
 }
 
 // === NAVIGATION ===
-let currentSection = 'dashboard';
+let currentSection = 'startHere';
 let nwTimeframe = '3M';
 const renderers = {};
 
@@ -344,18 +381,21 @@ function navigate(section){
   renderers[section]();
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('sidebarOverlay').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('menu-open');
 }
 
 document.querySelectorAll('.nav-item').forEach(n=>{
   n.addEventListener('click', ()=>navigate(n.dataset.section));
 });
 document.getElementById('hamburger').addEventListener('click', ()=>{
-  document.getElementById('sidebar').classList.toggle('open');
+  const open = document.getElementById('sidebar').classList.toggle('open');
   document.getElementById('sidebarOverlay').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('menu-open', open);
 });
 document.getElementById('sidebarOverlay').addEventListener('click', ()=>{
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('sidebarOverlay').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('menu-open');
 });
 document.getElementById('settingsBtn').addEventListener('click', renderSettingsModal);
 document.getElementById('themeBtn').addEventListener('click', toggleTheme);
@@ -383,6 +423,55 @@ function expenseByCategory(mKey){
   txInMonth(mKey).filter(t=>t.type==='expense').forEach(t=>{ map[t.category]=(map[t.category]||0)+t.amount; });
   return map;
 }
+
+// === START HERE ===
+renderers.startHere = function(){
+  const main = document.getElementById('main');
+  main.innerHTML = `
+    <div class="section-wrap">
+      <div class="section-header">
+        <h1>👋 Welcome to Ledger</h1>
+        <button class="btn-primary" id="goDashboard">Go to Dashboard →</button>
+      </div>
+      <p class="lead">Ledger is a personal finance &amp; investment tracker that runs entirely in your web browser. Track spending, set budgets, monitor your portfolio, and plan for the future — all in one place, with no account to create and nothing to install.</p>
+
+      <div class="start-note">💡<div>Everything you see right now — transactions, budgets, and holdings — is <b>sample placeholder data</b> so the app isn't empty while you explore. When you're ready, open <b>⚙️ Settings → Clear all data</b> to delete all of it (including every placeholder transaction) and start fresh with your own.</div></div>
+
+      <div class="card" style="margin-bottom:20px;">
+        <div class="start-title">What you can do</div>
+        <div class="feature-grid">
+          <div class="feature"><div class="fi">📊</div><div><h4>Dashboard</h4><p>Your snapshot: net worth, monthly income &amp; expenses, savings rate, a net-worth trend you can view over any time frame, and an expense breakdown.</p></div></div>
+          <div class="feature"><div class="fi">💳</div><div><h4>Transactions</h4><p>Log income and expenses, tag them by category, then search, filter, and sort. Everything else updates from this.</p></div></div>
+          <div class="feature"><div class="fi">🎯</div><div><h4>Budgets</h4><p>Set a monthly spending limit per category and watch progress bars turn amber and red as you approach the cap.</p></div></div>
+          <div class="feature"><div class="fi">📈</div><div><h4>Investments</h4><p>Track holdings with cost basis and current price to see gain/loss, total return, and portfolio allocation.</p></div></div>
+          <div class="feature"><div class="fi">🧮</div><div><h4>Calculators</h4><p>Project growth with the compound-interest calculator, or estimate your path to financial independence with FIRE.</p></div></div>
+          <div class="feature"><div class="fi">🗒️</div><div><h4>Reports</h4><p>Monthly and annual summaries: income vs. expenses, budget vs. actual, and category breakdowns with charts.</p></div></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:20px;">
+        <div class="start-title">How your information is saved</div>
+        <ul class="step-list">
+          <li><div class="step-num">1</div><p><b>It saves automatically.</b> There is no save button. The moment you add, edit, or delete anything, it's written to your browser's storage.</p></li>
+          <li><div class="step-num">2</div><p><b>It stays between visits.</b> Close the tab or quit your browser and come back later — your data will still be here when you reopen this page.</p></li>
+          <li><div class="step-num">3</div><p><b>Back it up or move it.</b> Open <b>⚙️ Settings</b> to <b>Export to JSON</b> (download a backup file) or <b>Import from JSON</b> (restore it on another browser or computer).</p></li>
+          <li><div class="step-num">4</div><p><b>Start fresh anytime.</b> The app comes preloaded with sample data so nothing looks empty. Use <b>Settings → Clear all data</b> to wipe it and begin with your own.</p></li>
+        </ul>
+      </div>
+
+      <div class="card callout">
+        <div class="ci">🔒</div>
+        <div>
+          <h4>Your data is private — it never leaves your computer</h4>
+          <p>Everything you enter is stored only in <b>this browser on this device</b> (using its built-in localStorage). There are no accounts, no sign-ins, and no tracking. Your financial information is <b>never sent to any server, database, or cloud</b> — not even ours.</p>
+          <p>Because the data lives locally, it is tied to this specific browser and the location of this file. Opening the app in a different browser, on another device, or clearing your browsing data will <b>not</b> carry your information over — use <b>Export / Import</b> to move it intentionally.</p>
+          <p>Ledger is a personal organizing tool and is <b>not</b> financial, investment, or tax advice. For decisions about your money, consult a qualified professional.</p>
+        </div>
+      </div>
+    </div>
+  `;
+  document.getElementById('goDashboard').addEventListener('click', ()=>navigate('dashboard'));
+};
 
 // === DASHBOARD ===
 renderers.dashboard = function(){
@@ -1463,7 +1552,7 @@ function renderSettingsModal(){
 let savedTheme = 'light';
 try{ savedTheme = localStorage.getItem('finance_theme') || 'light'; }catch(e){}
 applyTheme(savedTheme);
-navigate('dashboard');
+navigate('startHere');
 </script>
 </body>
 </html>
