@@ -8,7 +8,7 @@
 <style>
   /* ---- EDIT ME: hero ---- */
   .hero{min-height:auto;padding:64px 24px 56px;display:block;border-top:none;}
-  .hero-layout{display:flex;flex-direction:column;gap:36px;max-width:1000px;}
+  .hero-layout{display:flex;flex-direction:column;gap:28px;max-width:1000px;}
   .avatar{
     width:120px;height:120px;border-radius:50%;background:#111827;border:1px solid #1f2937;
     display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:600;
@@ -38,12 +38,11 @@
   /* desktop-only photo collage — swap these for any of your own shots */
   .bio-collage{display:none;}
   @media(min-width:900px){
-    .bio-layout{grid-template-columns:1fr 280px;}
+    .bio-layout{grid-template-columns:1fr;}
     .bio-collage{
-      display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;
-      gap:10px;height:380px;
+      display:grid;grid-template-columns:repeat(3,1fr);
+      gap:12px;height:280px;margin-top:32px;
     }
-    .bio-collage .c1{grid-row:1 / 3;}
     .bio-collage img{width:100%;height:100%;object-fit:cover;display:block;background:#111827;}
   }
 
@@ -102,8 +101,7 @@
 <section class="hero">
   <div class="hero-layout">
     <div class="avatar" data-parallax="0.12">
-      <!-- Replace this with: <img src="headshot.jpg" alt="Ryan Giang"> -->
-      RG
+      <img src="headshot.png" alt="Ryan Giang">
     </div>
     <div class="hero-content">
       <p class="eyebrow">About</p>
@@ -162,9 +160,9 @@
       </div>
     </div>
     <div class="bio-collage" aria-hidden="true">
-      <img class="c1" src="Media/Portrait/DSC07608.jpg" alt="" loading="lazy">
-      <img class="c2" src="Media/Automotive/DSC01062.jpg" alt="" loading="lazy">
-      <img class="c3" src="Media/Astrophotography/DSC00031.jpg" alt="" loading="lazy">
+      <img class="c1" src="Media/Portrait/DSC06614.jpg" alt="" loading="lazy">
+      <img class="c2" src="Media/Automotive/DSC01032.JPG" alt="" loading="lazy">
+      <img class="c3" src="Media/Astrophotography/DSC00030-2.jpg" alt="" loading="lazy">
     </div>
   </div>
 </section>
@@ -175,10 +173,11 @@
   <h2>What I build on the side</h2>
   <div class="reveal">
     <p>
-      Beyond accounting, I design and ship small software projects end-to-end —
-      usually with AI-assisted ("vibe coded") development. That includes this
-      site, a personal finance and investment tracker, and an all-in-one workout
-      and nutrition app, alongside my photography portfolio.
+      Beyond accounting, I design and ship small software projects end to end —
+      leveraging agentic AI tools to assist in development, testing, and
+      debugging. Some of the apps include this site, a personal finance and
+      investment tracker, and an all-in-one workout and nutrition app,
+      alongside my photography portfolio.
     </p>
     <a href="projects.html" class="btn btn-primary">View My Projects</a>
   </div>
