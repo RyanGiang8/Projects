@@ -31,6 +31,22 @@
     });
   }
 
+  /* ---- mobile-only: fade out the nav brand once the page is scrolled ---- */
+  const brand = document.querySelector('.sitenav .brand');
+  const mobileQuery = window.matchMedia('(max-width:767px)');
+  if (brand) {
+    const updateBrandVisibility = () => {
+      if (!mobileQuery.matches) {
+        brand.classList.remove('nav-hidden');
+        return;
+      }
+      brand.classList.toggle('nav-hidden', window.scrollY > 24);
+    };
+    document.addEventListener('scroll', updateBrandVisibility, { passive: true });
+    mobileQuery.addEventListener('change', updateBrandVisibility);
+    updateBrandVisibility();
+  }
+
   /* ---- scroll progress bar ---- */
   const bar = document.createElement('div');
   bar.id = 'scrollProgress';
