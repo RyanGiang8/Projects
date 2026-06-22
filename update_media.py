@@ -23,7 +23,7 @@ MEDIA = ROOT / "photography.html"
 MEDIA_DIR = ROOT / "Media"
 
 IMAGE_EXTS = {".jpg", ".jpeg", ".png"}
-SKIP_DIRS = {"Video"}  # not displayed on the site (e.g. raw video files)
+SKIP_DIRS = {"Video", "Projects"}  # not photography categories (raw video, project-card screenshots)
 MAX_DIMENSION = 2000
 JPEG_QUALITY = 80
 
