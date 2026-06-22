@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Scans Media/<Category> folders, compresses any oversized photos with sips,
-and regenerates the photosByCategory/tabs block in index.html to match
+and regenerates the photosByCategory/tabs block in photography.html to match
 exactly what's on disk.
 
 Usage:
@@ -19,7 +19,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).parent
-MEDIA = ROOT / "index.html"
+MEDIA = ROOT / "photography.html"
 MEDIA_DIR = ROOT / "Media"
 
 IMAGE_EXTS = {".jpg", ".jpeg", ".png"}
@@ -131,12 +131,12 @@ def main():
         re.DOTALL
     )
     if not pattern.search(html):
-        sys.exit("Could not find AUTO-GENERATED markers in index.html")
+        sys.exit(f"Could not find AUTO-GENERATED markers in {MEDIA.name}")
 
     new_block = render_block(categories)
     html = pattern.sub(new_block, html, count=1)
     MEDIA.write_text(html)
-    print("\nindex.html updated.")
+    print(f"\n{MEDIA.name} updated.")
 
 
 if __name__ == "__main__":
