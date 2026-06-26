@@ -3,7 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ryan Giang — Photography Portfolio</title>
+<title>Ryan Giang | Photographer in Ottawa, Toronto &amp; Montreal</title>
+<meta name="description" content="Ryan Giang is an Ottawa-based photographer covering automotive, portrait, landscape, street &amp; astrophotography across Ottawa, Toronto &amp; Montreal.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ryangiang.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ryan Giang | Photographer in Ottawa, Toronto &amp; Montreal">
+<meta property="og:description" content="Automotive, portrait, landscape, street &amp; astrophotography by Ryan Giang — based in Ottawa, available across Ottawa, Toronto &amp; Montreal.">
+<meta property="og:url" content="https://ryangiang.com/">
+<meta property="og:image" content="https://ryangiang.com/og/og-photography.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ryan Giang | Photographer">
+<meta name="twitter:description" content="Automotive, portrait, landscape, street &amp; astrophotography — Ottawa, Toronto &amp; Montreal.">
+<meta name="twitter:image" content="https://ryangiang.com/og/og-photography.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Ryan Giang",
+  "url": "https://ryangiang.com/",
+  "image": "https://ryangiang.com/headshot.png",
+  "jobTitle": "Tax Analyst & Photographer",
+  "description": "Ottawa-based Tax Analyst at Deloitte and photographer specializing in automotive, portrait, landscape, street, and astrophotography across Ottawa, Toronto, and Montreal.",
+  "knowsAbout": ["Accounting", "Tax Advisory", "Photography", "Software Development"],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Ottawa",
+    "addressRegion": "ON",
+    "addressCountry": "CA"
+  },
+  "areaServed": ["Ottawa", "Toronto", "Montreal"],
+  "sameAs": [
+    "https://www.linkedin.com/in/ryangiang/",
+    "https://www.instagram.com/capitalcarz/"
+  ]
+}
+</script>
+
 <link rel="stylesheet" href="site.css">
 <style>
   header{padding:48px 24px 0;}
@@ -165,7 +203,7 @@
 function buildCategory(folder, files){
   return files.map((f, i) => ({
     url: `Media/${folder}/${f}`,
-    alt: `${folder} photography ${i + 1}`
+    alt: `${folder} photography by Ryan Giang, Ottawa-based photographer — photo ${i + 1}`
   }));
 }
 
