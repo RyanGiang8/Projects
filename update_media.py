@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Scans Media/<Category> folders, compresses any oversized photos with sips,
-and regenerates the photosByCategory/tabs block in photography.html to match
+and regenerates the photosByCategory/tabs block in index.html to match
 exactly what's on disk.
 
 Usage:
@@ -19,7 +19,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).parent
-MEDIA = ROOT / "photography.html"
+MEDIA = ROOT / "index.html"
 MEDIA_DIR = ROOT / "Media"
 
 IMAGE_EXTS = {".jpg", ".jpeg", ".png"}

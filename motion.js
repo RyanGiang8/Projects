@@ -1,4 +1,4 @@
-/* Shared motion layer for index.html, photography.html, projects.html:
+/* Shared motion layer for index.html, about.html, projects.html:
    - scroll progress bar
    - staggered scroll-reveal (apply class="reveal" to a container; its direct
      children fade/slide in one after another as it enters the viewport)
