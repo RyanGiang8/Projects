@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mineblock | Ryan Giang</title>
+<meta name="description" content="Mineblock — a first-person voxel sandbox in the browser, built with Three.js. Mine blocks, craft tools, and build with a full Minecraft-style crafting progression.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://ryangiang.com/mineblock/">
+<link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+<canvas id="game"></canvas>
+<a href="../projects.html" id="backLink">&#8617; Back to Portfolio</a>
+
+<div id="hud">
+  <div id="crosshair"></div>
+  <div id="itemName"></div>
+  <div id="hudBottom">
+    <div id="hearts"></div>
+    <div id="hotbar"></div>
+  </div>
+</div>
+
+<div id="underwater"></div>
+<div id="damageFlash"></div>
+
+<div id="screens">
+  <div id="startScreen" class="screen fullscreen">
+    <h1 class="title">MINEBLOCK</h1>
+    <div class="subtitle">a voxel sandbox</div>
+    <button id="playBtn" class="mcbtn">Play</button>
+    <div class="controls-box">
+      <b>Controls</b>
+      <span>WASD — move &nbsp;·&nbsp; Mouse — look &nbsp;·&nbsp; Space — jump</span>
+      <span>Hold Left Click — mine &nbsp;·&nbsp; Right Click — place / use</span>
+      <span>E — inventory &nbsp;·&nbsp; 1-9 / wheel — hotbar &nbsp;·&nbsp; Ctrl — sprint</span>
+      <span class="hint">Punch a tree to get started. Logs → planks → crafting table → tools!</span>
+    </div>
+  </div>
+
+  <div id="pauseScreen" class="screen fullscreen hidden">
+    <h1 class="title small">Paused</h1>
+    <button id="resumeBtn" class="mcbtn">Back to Game</button>
+    <button id="resetBtn" class="mcbtn danger">Reset World</button>
+    <div class="controls-box">
+      <b>Recipe hints</b>
+      <span>1 Log → 4 Planks &nbsp;·&nbsp; 2 Planks (stacked) → 4 Sticks</span>
+      <span>4 Planks (2×2) → Crafting Table &nbsp;·&nbsp; 8 Cobblestone (ring) → Furnace</span>
+      <span>Pickaxe: 3 material on top + 2 sticks below (3×3)</span>
+      <span>Coal over Stick → Torches &nbsp;·&nbsp; Smelt iron ore / sand / logs in the furnace</span>
+      <span class="hint">Progress saves automatically in your browser.</span>
+    </div>
+  </div>
+
+  <div id="invScreen" class="screen hidden">
+    <div id="invPanel" class="panel"></div>
+  </div>
+</div>
+
+<div id="cursorStack" class="hidden"></div>
+<div id="tooltip" class="hidden"></div>
+<div id="toast" class="hidden"></div>
+
+<script src="js/three.min.js?v=2"></script>
+<script src="js/textures.js?v=2"></script>
+<script src="js/registry.js?v=2"></script>
+<script src="js/world.js?v=2"></script>
+<script src="js/player.js?v=2"></script>
+<script src="js/inventory.js?v=2"></script>
+<script src="js/main.js?v=2"></script>
+</body>
+</html>

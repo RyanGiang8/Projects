@@ -53,7 +53,7 @@
     font-size:.78rem;color:#d1d5db;border:1px solid #1f2937;padding:5px 12px;
     border-radius:999px;letter-spacing:.02em;
   }
-  .project-card .cta-row{margin-top:22px;}
+  .project-card .cta-row{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap;}
   .badge-soon{
     font-size:.78rem;color:#6b7280;border:1px solid #1f2937;padding:5px 12px;
     border-radius:999px;display:inline-block;margin-top:22px;
@@ -173,6 +173,38 @@
           <span class="tag">Express</span>
         </div>
         <span class="badge-soon">Not yet deployed</span>
+      </div>
+    </div>
+
+    <!-- ============ EDIT ME: project 4 ============ -->
+    <div class="project-card reveal" data-tilt>
+      <div class="project-media">
+        <img src="Media/Projects/mineblock-shot.jpg" alt="Title screen of Mineblock, a browser voxel sandbox game" loading="lazy">
+      </div>
+      <div>
+        <div class="meta">04 — Game Development</div>
+        <h2>Mineblock — Browser Voxel Sandbox</h2>
+        <p>
+          A first-person Minecraft-style sandbox that runs entirely in the
+          browser, built with Three.js and vanilla JavaScript — no game engine,
+          no external art assets. Every block texture and item icon is painted
+          procedurally on canvas at load time.
+        </p>
+        <ul>
+          <li>Infinite seeded terrain with caves, ore veins, and chunked streaming as you explore</li>
+          <li>Mining with per-tool break speeds and tiered harvest requirements</li>
+          <li>Full crafting progression: 2x2 inventory crafting, a 3x3 crafting table, and furnace smelting</li>
+          <li>Autosaves your world and inventory to the browser between visits</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag">JavaScript</span>
+          <span class="tag">Three.js</span>
+          <span class="tag">WebGL</span>
+        </div>
+        <div class="cta-row">
+          <a href="mineblock/index.html" class="btn btn-primary">Play Game</a>
+          <a href="https://github.com/RyanGiang8/Mineblock" class="btn btn-secondary" target="_blank" rel="noopener">View Code</a>
+        </div>
       </div>
     </div>
 
