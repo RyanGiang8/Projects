@@ -30,7 +30,7 @@ JPEG_QUALITY = 80
 # Preferred tab order for known categories; anything new is appended
 # alphabetically after these.
 PREFERRED_ORDER = [
-    "Automotive", "Landscape", "Astrophotography", "Portrait", "Street", "Corporate"
+    "Automotive", "Landscape", "Portrait", "Street", "Astrophotography", "Corporate"
 ]
 
 

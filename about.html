@@ -71,8 +71,9 @@
   /* mobile-only fun facts strip, shown instead of the photo collage */
   .bio-facts{display:flex;gap:12px;overflow-x:auto;margin-top:28px;padding-bottom:4px;}
   .bio-facts .fact{
-    flex:0 0 auto;background:#0a0a0a;border:1px solid #1f2937;border-radius:10px;
-    padding:14px 18px;min-width:170px;
+    flex:0 0 auto;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+    border-radius:12px;padding:14px 18px;min-width:170px;
+    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
   }
   .bio-facts .fact .fact-label{color:#6b7280;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;}
   .bio-facts .fact .fact-value{color:#fff;font-size:.95rem;margin-top:6px;font-weight:500;}
@@ -90,10 +91,13 @@
   }
   .tool-chips{display:flex;flex-wrap:wrap;gap:10px;}
   .tool-chip{
-    display:flex;align-items:center;gap:10px;background:#0a0a0a;border:1px solid #1f2937;
-    border-radius:10px;padding:10px 16px;transition:border-color .2s,background .2s,transform .15s;
+    display:flex;align-items:center;gap:10px;
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+    border-radius:12px;padding:10px 16px;white-space:nowrap;
+    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+    transition:border-color .2s,background .2s,transform .15s;
   }
-  .tool-chip:hover{border-color:#374151;background:#111827;transform:translateY(-2px);}
+  .tool-chip:hover{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.09);transform:translateY(-2px);}
   .tool-chip .icon-slot{
     width:20px;height:20px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
     color:#9ca3af;
@@ -129,6 +133,7 @@
 
 <!-- ============ EDIT ME: HERO — swap the avatar placeholder below for a real headshot ============ -->
 <section class="hero">
+  <div class="glow glow-blue" style="width:420px;height:420px;top:-160px;right:-120px;" aria-hidden="true"></div>
   <div class="hero-layout">
     <div class="avatar" data-parallax="0.12">
       <img src="headshot.png" alt="Ryan Giang">
@@ -204,6 +209,7 @@
 
 <!-- ============ EDIT ME: PROJECTS TEASER ============ -->
 <section class="projects-teaser">
+  <div class="glow glow-violet" style="width:380px;height:380px;bottom:-180px;left:-100px;" aria-hidden="true"></div>
   <p class="section-label"><span class="num">02</span> Projects</p>
   <h2>What I build on the side</h2>
   <div class="reveal">
@@ -328,6 +334,7 @@
 
 <!-- ============ EDIT ME: CLOSING CTA ============ -->
 <section class="cta-section reveal">
+  <div class="glow glow-blue" style="width:460px;height:460px;top:-120px;right:-140px;opacity:.1;" aria-hidden="true"></div>
   <p class="section-label"><span class="num">05</span> Let's Talk</p>
   <h2>Let's connect.</h2>
   <p>Open to opportunities in accounting, tax, and finance — and always happy to talk personal finance, wealth management, or photography.</p>
