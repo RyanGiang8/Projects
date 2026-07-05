@@ -1,9 +1,8 @@
 /* Shared motion layer for index.html, about.html, projects.html:
-   - scroll progress bar
-   - staggered scroll-reveal (apply class="reveal" to a container; its direct
-     children fade/slide in one after another as it enters the viewport)
-   - custom cursor + subtle scroll-linked parallax on [data-parallax] elements
-   The cursor and parallax are skipped entirely for touch devices and for
+   - mobile nav toggle, scroll progress bar, back-to-top, page fades
+   - staggered scroll-reveal, timeline draw-in, skills marquee
+   - scroll-linked parallax and card tilt on [data-parallax]/[data-tilt]
+   Parallax and tilt are skipped entirely for touch devices and for
    visitors with prefers-reduced-motion enabled — not just slowed down. */
 (function () {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -158,52 +157,31 @@
     });
   }
 
-  if (reduceMotion || !finePointer) return; // skip cursor + parallax + tilt
+  if (reduceMotion || !finePointer) return; // skip parallax + tilt
 
-  /* ---- custom cursor ---- */
-  const dot = document.createElement('div');
-  dot.className = 'cursor-dot';
-  const ring = document.createElement('div');
-  ring.className = 'cursor-ring';
-  document.body.appendChild(dot);
-  document.body.appendChild(ring);
-  document.body.classList.add('custom-cursor-active');
-
-  let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
-  let ringX = mouseX, ringY = mouseY;
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    dot.style.left = mouseX + 'px';
-    dot.style.top = mouseY + 'px';
-  });
-  document.addEventListener('mouseover', (e) => {
-    const isInteractive = e.target.closest('a, button, .photo, input, textarea, label');
-    ring.classList.toggle('cursor-hover', !!isInteractive);
-  });
-
-  function tick() {
-    ringX += (mouseX - ringX) * 0.18;
-    ringY += (mouseY - ringY) * 0.18;
-    ring.style.left = ringX + 'px';
-    ring.style.top = ringY + 'px';
-    requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-
-  /* ---- subtle scroll-linked parallax ---- */
+  /* ---- subtle scroll-linked parallax (updates only while scrolling,
+          not in a permanent per-frame loop) ---- */
   const parallaxEls = document.querySelectorAll('[data-parallax]');
   if (parallaxEls.length) {
+    let parallaxQueued = false;
     function updateParallax() {
+      parallaxQueued = false;
       parallaxEls.forEach(el => {
         const speed = parseFloat(el.dataset.parallax) || 0.15;
         const rect = el.getBoundingClientRect();
         const distanceFromCenter = rect.top + rect.height / 2 - window.innerHeight / 2;
         el.style.transform = `translateY(${distanceFromCenter * -speed}px)`;
       });
-      requestAnimationFrame(updateParallax);
     }
-    requestAnimationFrame(updateParallax);
+    function queueParallax() {
+      if (!parallaxQueued) {
+        parallaxQueued = true;
+        requestAnimationFrame(updateParallax);
+      }
+    }
+    document.addEventListener('scroll', queueParallax, { passive: true });
+    window.addEventListener('resize', queueParallax);
+    updateParallax();
   }
 
   /* ---- 3D tilt toward cursor on [data-tilt] cards ---- */
