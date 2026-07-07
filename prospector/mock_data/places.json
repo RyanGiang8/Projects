@@ -1,0 +1,77 @@
+{
+  "places": [
+    {
+      "id": "mock_no_website_1",
+      "displayName": { "text": "Kanata Shine Auto Detailing" },
+      "formattedAddress": "120 Terence Matthews Cres, Kanata, ON",
+      "nationalPhoneNumber": "(613) 555-0101",
+      "rating": 4.9,
+      "userRatingCount": 143,
+      "googleMapsUri": "https://maps.google.com/?cid=mock1",
+      "businessStatus": "OPERATIONAL"
+    },
+    {
+      "id": "mock_dated_site_2",
+      "displayName": { "text": "Bill's Mobile Detailing" },
+      "formattedAddress": "88 March Rd, Kanata, ON",
+      "nationalPhoneNumber": "(613) 555-0102",
+      "websiteUri": "http://billsmobiledetailing.example.com",
+      "rating": 4.6,
+      "userRatingCount": 67,
+      "googleMapsUri": "https://maps.google.com/?cid=mock2",
+      "businessStatus": "OPERATIONAL"
+    },
+    {
+      "id": "mock_facebook_only_3",
+      "displayName": { "text": "Prestige Detail Co" },
+      "formattedAddress": "45 Hazeldean Rd, Kanata, ON",
+      "nationalPhoneNumber": "(613) 555-0103",
+      "websiteUri": "https://prestige-detail.example.com",
+      "rating": 4.8,
+      "userRatingCount": 31,
+      "googleMapsUri": "https://maps.google.com/?cid=mock3",
+      "businessStatus": "OPERATIONAL"
+    },
+    {
+      "id": "mock_good_site_4",
+      "displayName": { "text": "Crystal Clear Auto Spa" },
+      "formattedAddress": "300 Eagleson Rd, Kanata, ON",
+      "nationalPhoneNumber": "(613) 555-0104",
+      "websiteUri": "https://crystalclear.example.com",
+      "rating": 4.7,
+      "userRatingCount": 210,
+      "googleMapsUri": "https://maps.google.com/?cid=mock4",
+      "businessStatus": "OPERATIONAL"
+    },
+    {
+      "id": "mock_unreachable_5",
+      "displayName": { "text": "Ottawa West Detail Shop" },
+      "formattedAddress": "12 Carling Ave, Ottawa, ON",
+      "nationalPhoneNumber": "(613) 555-0105",
+      "websiteUri": "http://ottawawestdetail.example.com",
+      "rating": 4.2,
+      "userRatingCount": 18,
+      "googleMapsUri": "https://maps.google.com/?cid=mock5",
+      "businessStatus": "OPERATIONAL"
+    },
+    {
+      "id": "mock_closed_6",
+      "displayName": { "text": "Gone Forever Detailing" },
+      "formattedAddress": "1 Nowhere St, Nepean, ON",
+      "rating": 3.9,
+      "userRatingCount": 4,
+      "googleMapsUri": "https://maps.google.com/?cid=mock6",
+      "businessStatus": "CLOSED_PERMANENTLY"
+    },
+    {
+      "id": "mock_contacted_7",
+      "displayName": { "text": "Already Contacted Detailing" },
+      "formattedAddress": "9 Somewhere Ave, Kanata, ON",
+      "nationalPhoneNumber": "(613) 555-0107",
+      "rating": 4.5,
+      "userRatingCount": 50,
+      "googleMapsUri": "https://maps.google.com/?cid=mock7",
+      "businessStatus": "OPERATIONAL"
+    }
+  ]
+}
