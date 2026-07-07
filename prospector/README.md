@@ -1,10 +1,21 @@
 # Prospector — find local businesses that need a (better) website
 
-Finds businesses in a niche + area via the Google Places API, runs deterministic
-website health checks, scores each lead 0–10, and writes a CSV sorted by score.
-AI is used for exactly one thing: a single batched call that writes a one-line
-pitch angle per qualifying lead. Everything else is plain code, so re-runs are
-free and results are reproducible.
+Finds businesses in a niche + area, runs deterministic website health checks,
+scores each lead 0–10, and writes a CSV sorted by score. Two interchangeable
+front-ends share the same pipeline:
+
+| | `prospect.py` (v1) | `prospect_free.py` (v2, **keyless**) |
+|---|---|---|
+| Business data | Google Places API (key required) | OpenStreetMap — Nominatim + Overpass (**no key, no billing**) |
+| Ratings/reviews | ✅ used for the +2 revenue bonus | ❌ not in OSM — bonus uses phone + posted hours instead |
+| Coverage | dense, current | varies by area; good in cities, thinner for tiny shops |
+| Pitch angles | 1 batched Anthropic call (optional key) | deterministic templates (**no AI**) |
+| Cost | free tier (~3 calls/run) | $0, nothing to sign up for |
+| Output | `leads_scored_DATE.csv` | `leads_scored_free_DATE.csv` |
+
+In v1, AI is used for exactly one thing: a single batched call that writes a
+one-line pitch angle per qualifying lead. Everything else in both versions is
+plain code, so re-runs are free and results are reproducible.
 
 ```
 Step 1  Google Places text search (cached to cache/, ~3 API calls per run)
@@ -14,7 +25,39 @@ Step 4  One batched Anthropic call for pitch angles (leads scoring >= 6 only)
 Step 5  leads_scored_YYYY-MM-DD.csv + terminal summary
 ```
 
-## Setup
+## Keyless version (v2) — zero setup
+
+```bash
+cd prospector
+pip install -r requirements.txt   # just requests + beautifulsoup4 needed
+
+python prospect_free.py --niche "auto detailing" --area "Kanata, Ottawa"
+python prospect_free.py --niche "plumber" --area "Barrhaven, Ottawa" --dry-run
+python prospect_free.py --niche "auto detailing" --area "Kanata, Ottawa" --mock
+```
+
+No `.env`, no keys, no accounts. It geocodes the area with Nominatim (1 free
+request), pulls matching businesses from the Overpass API (1 free request),
+then runs the exact same website checks and scoring. Both responses are cached
+for 7 days, so re-runs make zero requests. Same flags as v1
+(`--dry-run`, `--mock`, `--refresh`, `--min-score`, `--contacted`).
+
+Niche matching uses a curated OSM tag map (mechanics, plumbers, salons,
+roofers, etc. — see `NICHE_TAGS` in `osm.py`) plus a name-keyword search, so
+unknown niches still work. Pitch angles come from templates in
+`pitch_templates.py` keyed on the biggest problem found.
+
+**Keyless caveats:**
+
+- OSM has no ratings, so the +2 "proves revenue" bonus instead fires when the
+  listing has a phone number *and* posted opening hours (an actively
+  maintained listing).
+- "No website" means *none listed on OSM* — a shop may have an untagged site.
+  Spot-check top leads with a quick manual search before pitching.
+- Nominatim/Overpass are shared community services: the tool sends an honest
+  User-Agent, makes at most 2 requests per run, and backs off on 429s. Be nice.
+
+## Google-backed version (v1) — setup
 
 1. **Install dependencies** (Python 3.10+):
 

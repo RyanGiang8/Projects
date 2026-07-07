@@ -56,6 +56,24 @@ def score_lead(lead: dict, issues: list[str]) -> int | None:
     return min(points, MAX_SCORE)
 
 
+def score_lead_keyless(lead: dict, issues: list[str]) -> int | None:
+    """Scoring for OSM-sourced leads (no ratings available).
+
+    Same weights as score_lead, but the +2 'proves real revenue' bonus uses an
+    OSM proxy instead of reviews: a phone number AND posted opening hours,
+    i.e. an actively maintained listing.
+    """
+    base = score_lead(lead, issues)
+    if base is None:
+        return None
+    reviews = lead.get("review_count") or 0
+    rating = lead.get("rating") or 0
+    already_bonused = reviews >= PROVEN_REVENUE_REVIEWS and rating >= PROVEN_REVENUE_RATING
+    if not already_bonused and lead.get("phone") and lead.get("has_hours"):
+        base += 2
+    return min(base, MAX_SCORE)
+
+
 def describe_issues(lead: dict, issues: list[str]) -> str:
     """Human-readable, semicolon-separated issue list for the CSV."""
     labels = []

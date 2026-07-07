@@ -30,7 +30,7 @@ def test_mock_run_end_to_end(tmp_path, monkeypatch):
     )
     assert result.returncode == 0, result.stderr
 
-    csv_files = sorted(PROJECT.glob("leads_scored_*.csv"))
+    csv_files = sorted(PROJECT.glob("leads_scored_2*.csv"))  # excludes leads_scored_free_*
     assert csv_files, "no output CSV written"
     rows = list(csv.DictReader(csv_files[-1].open()))
     by_id = {r["place_id"]: r for r in rows}

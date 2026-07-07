@@ -19,9 +19,9 @@ CSV_COLUMNS = [
 ]
 
 
-def write_csv(leads: list[dict], out_dir: Path) -> Path:
+def write_csv(leads: list[dict], out_dir: Path, stem: str = "leads_scored") -> Path:
     """Write leads (already scored) sorted by score descending."""
-    out_path = out_dir / f"leads_scored_{date.today().isoformat()}.csv"
+    out_path = out_dir / f"{stem}_{date.today().isoformat()}.csv"
     ordered = sorted(leads, key=lambda l: l.get("score") or 0, reverse=True)
     with out_path.open("w", newline="", encoding="utf-8") as fh:
         writer = csv.DictWriter(fh, fieldnames=CSV_COLUMNS, extrasaction="ignore")
