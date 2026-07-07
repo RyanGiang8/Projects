@@ -1,0 +1,23 @@
+{
+  "http://billsmobiledetailing.example.com": {
+    "final_url": "http://billsmobiledetailing.example.com",
+    "status": 200,
+    "elapsed": 1.2,
+    "html": "<html><head><title>billsmobiledetailing</title><meta name=\"generator\" content=\"GoDaddy Website Builder 8.0\"></head><body><h1>Bill's Mobile Detailing</h1><p>We come to you!</p><footer>&copy; 2019 Bill's Mobile Detailing</footer></body></html>"
+  },
+  "https://prestige-detail.example.com": {
+    "final_url": "https://www.facebook.com/prestigedetailco",
+    "status": 200,
+    "elapsed": 0.8,
+    "html": "<html><head><title>Prestige Detail Co | Facebook</title></head><body>facebook page</body></html>"
+  },
+  "https://crystalclear.example.com": {
+    "final_url": "https://crystalclear.example.com",
+    "status": 200,
+    "elapsed": 0.6,
+    "html": "<html><head><title>Crystal Clear Auto Spa - Ceramic Coating &amp; Detailing in Kanata</title><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"></head><body><h1>Crystal Clear Auto Spa</h1><footer>&copy; 2026 Crystal Clear</footer></body></html>"
+  },
+  "http://ottawawestdetail.example.com": {
+    "error": "dns"
+  }
+}

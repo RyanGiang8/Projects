@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Website Intake Form</title>
+<style>
+  :root{--ink:#1a1f2e;--muted:#5b6472;--line:#d9dee6;--accent:#0f6b4f;--accent-soft:#e7f3ee;--bg:#f5f6f8;--card:#ffffff;--warn:#b3541e}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Georgia,'Times New Roman',serif;background:var(--bg);color:var(--ink);line-height:1.55}
+  .wrap{max-width:760px;margin:0 auto;padding:24px 16px 80px}
+  header{padding:28px 0 10px}
+  header h1{font-size:1.7rem;letter-spacing:.2px}
+  header p{color:var(--muted);margin-top:6px;font-size:.98rem}
+  .progress-shell{position:sticky;top:0;background:var(--bg);padding:12px 0;z-index:5}
+  .progress-track{height:10px;background:var(--line);border-radius:6px;overflow:hidden}
+  .progress-fill{height:100%;width:0%;background:var(--accent);transition:width .3s}
+  .progress-label{font-size:.8rem;color:var(--muted);margin-top:5px;font-family:Arial,Helvetica,sans-serif}
+  section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px;margin:18px 0}
+  section h2{font-size:1.12rem;margin-bottom:4px}
+  section h2 .num{display:inline-block;background:var(--accent-soft);color:var(--accent);border-radius:6px;
+    font-family:Arial,Helvetica,sans-serif;font-size:.8rem;padding:2px 8px;margin-right:8px;vertical-align:2px}
+  section .hint{color:var(--muted);font-size:.9rem;margin-bottom:14px}
+  label{display:block;font-family:Arial,Helvetica,sans-serif;font-size:.82rem;color:var(--muted);
+    text-transform:uppercase;letter-spacing:.06em;margin:14px 0 4px}
+  label .req{color:var(--warn);text-transform:none;letter-spacing:0}
+  input[type=text],input[type=tel],input[type=email],input[type=date],textarea,select{
+    width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:7px;font:inherit;font-size:1rem;background:#fff}
+  textarea{min-height:84px;resize:vertical}
+  input:focus,textarea:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+  .row{display:flex;gap:14px;flex-wrap:wrap}
+  .row>div{flex:1;min-width:200px}
+  .check{display:flex;align-items:flex-start;gap:10px;margin:9px 0;font-size:.98rem}
+  .check input{width:18px;height:18px;margin-top:3px;accent-color:var(--accent)}
+  .service{border:1px dashed var(--line);border-radius:8px;padding:14px;margin:10px 0;position:relative}
+  .service .remove{position:absolute;top:8px;right:10px;background:none;border:none;color:var(--warn);
+    cursor:pointer;font-family:Arial,Helvetica,sans-serif;font-size:.8rem}
+  .btn{font-family:Arial,Helvetica,sans-serif;border:none;border-radius:8px;cursor:pointer;padding:11px 18px;font-size:.95rem}
+  .btn.ghost{background:var(--accent-soft);color:var(--accent)}
+  .btn.primary{background:var(--accent);color:#fff;font-size:1.05rem;padding:14px 26px;width:100%}
+  .color-row{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:6px}
+  .color-row .swatch{display:flex;align-items:center;gap:8px;font-size:.95rem}
+  input[type=color]{width:46px;height:34px;border:1px solid var(--line);border-radius:6px;background:#fff;padding:2px;cursor:pointer}
+  .note{background:var(--accent-soft);border-radius:7px;padding:10px 13px;font-size:.9rem;margin-top:10px}
+  #status{margin-top:14px;font-family:Arial,Helvetica,sans-serif;font-size:.95rem}
+  #status.error{color:var(--warn)} #status.ok{color:var(--accent)}
+  footer{color:var(--muted);font-size:.85rem;text-align:center;margin-top:26px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Your New Website — Intake Form</h1>
+    <p>This takes about 10 minutes. Only <strong>phone</strong> and <strong>services</strong> are required —
+       skip anything you're unsure about and we'll sort it on our call. Nothing is sent anywhere:
+       at the end this page saves a file to your computer, and you just email it back to me.</p>
+  </header>
+
+  <div class="progress-shell">
+    <div class="progress-track"><div class="progress-fill" id="bar"></div></div>
+    <div class="progress-label" id="barLabel">0% complete</div>
+  </div>
+
+  <form id="intake" onsubmit="return false">
+
+    <section data-sec>
+      <h2><span class="num">1</span>Business basics</h2>
+      <p class="hint">Confirm or correct — some of this may be pre-filled.</p>
+      <div class="row">
+        <div><label>Business name</label><input type="text" id="bizName" data-p></div>
+        <div><label>Phone <span class="req">(required — this goes on every call button)</span></label>
+          <input type="tel" id="phone" data-p></div>
+      </div>
+      <div class="row">
+        <div><label>Email</label><input type="email" id="email" data-p></div>
+        <div><label>Address (as it should appear on the site)</label><input type="text" id="address" data-p></div>
+      </div>
+      <label>Business hours</label>
+      <textarea id="hours" placeholder="Mon–Fri 8–6, Sat 9–4, closed Sunday" data-p></textarea>
+    </section>
+
+    <section data-sec>
+      <h2><span class="num">2</span>Brand &amp; look</h2>
+      <p class="hint">If you have no preference, I'll pick something that fits your industry.</p>
+      <div class="color-row">
+        <div class="swatch"><input type="color" id="color1" value="#0f6b4f"><span>Main color</span></div>
+        <div class="swatch"><input type="color" id="color2" value="#1a1f2e"><span>Second color</span></div>
+        <div class="check" style="margin:0"><input type="checkbox" id="noColorPref"><span>No preference — designer's choice</span></div>
+      </div>
+      <div class="check"><input type="checkbox" id="hasLogo">
+        <span>I have a logo — <strong>I'll email the file</strong> (don't attach it here; highest-quality version you have)</span></div>
+      <label>Font feel</label>
+      <select id="fontFeel">
+        <option value="">No preference</option>
+        <option>Bold &amp; industrial</option>
+        <option>Clean &amp; modern</option>
+        <option>Warm &amp; friendly</option>
+        <option>Classic &amp; professional</option>
+      </select>
+      <label>2–3 websites you like the look of (any industry)</label>
+      <textarea id="sitesLiked" placeholder="one per line, with a word on why"></textarea>
+    </section>
+
+    <section data-sec>
+      <h2><span class="num">3</span>Services <span class="req" style="font-size:.8rem">(required — at least one)</span></h2>
+      <p class="hint">Exactly what should appear on the site, worded how you'd say it. Prices optional —
+         "from $99" works, or leave blank to show no price.</p>
+      <div id="services"></div>
+      <button class="btn ghost" type="button" onclick="addService()">+ Add another service</button>
+    </section>
+
+    <section data-sec>
+      <h2><span class="num">4</span>Real photos</h2>
+      <p class="hint">Real photos outsell stock photos every time — phone photos are fine.
+         Tick what you can send, then <strong>email them with your logo</strong>.</p>
+      <div class="check"><input type="checkbox" class="photo" value="storefront/shop exterior"><span>Storefront / shop exterior</span></div>
+      <div class="check"><input type="checkbox" class="photo" value="you or your team"><span>You or your team</span></div>
+      <div class="check"><input type="checkbox" class="photo" value="work examples"><span>Examples of your work</span></div>
+      <div class="check"><input type="checkbox" class="photo" value="before/after shots"><span>Before / after shots</span></div>
+      <div class="check"><input type="checkbox" class="photo" value="equipment/vehicle"><span>Equipment or vehicle with branding</span></div>
+    </section>
+
+    <section data-sec>
+      <h2><span class="num">5</span>Testimonials</h2>
+      <p class="hint">Paste 2–4 reviews or customer quotes you want featured (first names only is fine).
+         Skip this and I'll suggest some from your Google reviews.</p>
+      <textarea id="testimonials" placeholder="&quot;Best detail my truck has ever had.&quot; — Mike"></textarea>
+    </section>
+
+    <section data-sec>
+      <h2><span class="num">6</span>Your domain</h2>
+      <p class="hint">Needed to point your web address at the new site. If you're not sure, skip it —
+         we'll figure it out together on the phone.</p>
+      <div class="row">
+        <div><label>Domain name (if you own one)</label><input type="text" id="domain" placeholder="yourbusiness.ca"></div>
+        <div><label>Where it's registered</label><input type="text" id="registrar" placeholder="GoDaddy, Namecheap, don't know..."></div>
+      </div>
+      <label>Can you log in to that account?</label>
+      <select id="registrarAccess">
+        <option value="">Not sure</option>
+        <option>Yes, I have the login</option>
+        <option>Someone else manages it (I'll say who below)</option>
+        <option>No domain yet — please register one for me</option>
+      </select>
+      <label>Notes (who manages it, old web person's contact, etc.)</label>
+      <textarea id="domainNotes"></textarea>
+      <div class="note">Never type passwords into this form. I'll only ever need a temporary delegate
+        access or a 5-minute screen-share for the DNS switch.</div>
+    </section>
+
+    <section data-sec>
+      <h2><span class="num">7</span>What you DON'T want</h2>
+      <p class="hint">Anything you hate on other sites, things a previous designer got wrong,
+         colours/words/claims to avoid.</p>
+      <textarea id="avoid"></textarea>
+    </section>
+
+    <section data-sec>
+      <h2><span class="num">8</span>Launch</h2>
+      <label>Preferred launch date</label>
+      <input type="date" id="launchDate">
+      <label>Anything else I should know?</label>
+      <textarea id="anythingElse"></textarea>
+    </section>
+
+    <button class="btn primary" type="button" onclick="finish()">Finish &amp; save my answers</button>
+    <div id="status"></div>
+  </form>
+
+  <footer>Self-contained form — works offline, sends nothing. Your answers only leave this page
+    as the file you email back.</footer>
+</div>
+
+<script>
+"use strict";
+/* ---------- services (dynamic rows) ---------- */
+function addService(name, desc, price){
+  const wrap=document.getElementById("services");
+  const div=document.createElement("div");
+  div.className="service";
+  div.innerHTML=
+    '<button class="remove" type="button" onclick="this.parentNode.remove();update()">remove</button>'+
+    '<label>Service name</label><input type="text" class="svcName">'+
+    '<div class="row"><div><label>Short description</label><input type="text" class="svcDesc"></div>'+
+    '<div style="max-width:170px"><label>Price to display</label><input type="text" class="svcPrice" placeholder="from $99 / blank"></div></div>';
+  wrap.appendChild(div);
+  if(name) div.querySelector(".svcName").value=name;
+  if(desc) div.querySelector(".svcDesc").value=desc;
+  if(price) div.querySelector(".svcPrice").value=price;
+  div.querySelectorAll("input").forEach(i=>i.addEventListener("input",update));
+}
+addService(); addService();
+
+/* ---------- prefill from URL params (?business=&phone=&email=&address=) ---------- */
+(function(){
+  const q=new URLSearchParams(location.search);
+  const map={business:"bizName",name:"bizName",phone:"phone",email:"email",address:"address",hours:"hours"};
+  for(const[k,id]of Object.entries(map)){ if(q.get(k)) document.getElementById(id).value=q.get(k); }
+})();
+
+/* ---------- progress bar: a section counts once anything in it is filled ---------- */
+function sectionFilled(sec){
+  for(const el of sec.querySelectorAll("input,textarea,select")){
+    if(el.type==="checkbox"){ if(el.checked) return true; }
+    else if(el.type==="color"){ continue; }
+    else if(el.value && el.value.trim()) return true;
+  }
+  return false;
+}
+function update(){
+  const secs=[...document.querySelectorAll("[data-sec]")];
+  const done=secs.filter(sectionFilled).length;
+  const pct=Math.round(100*done/secs.length);
+  document.getElementById("bar").style.width=pct+"%";
+  document.getElementById("barLabel").textContent=pct+"% complete ("+done+" of "+secs.length+" sections)";
+}
+document.getElementById("intake").addEventListener("input",update);
+update();
+
+/* ---------- collect + validate + download JSON ---------- */
+function collect(){
+  const v=id=>document.getElementById(id).value.trim();
+  const services=[...document.querySelectorAll(".service")].map(s=>({
+    name:s.querySelector(".svcName").value.trim(),
+    description:s.querySelector(".svcDesc").value.trim(),
+    price:s.querySelector(".svcPrice").value.trim()
+  })).filter(s=>s.name);
+  return {
+    form_version:"1.0",
+    completed_at:new Date().toISOString(),
+    business:{name:v("bizName"),phone:v("phone"),email:v("email"),address:v("address"),hours:v("hours")},
+    brand:{
+      no_color_preference:document.getElementById("noColorPref").checked,
+      color_primary:document.getElementById("noColorPref").checked?"":v("color1"),
+      color_secondary:document.getElementById("noColorPref").checked?"":v("color2"),
+      has_logo_will_email:document.getElementById("hasLogo").checked,
+      font_feel:v("fontFeel"),
+      sites_liked:v("sitesLiked")
+    },
+    services:services,
+    photos_promised:[...document.querySelectorAll(".photo:checked")].map(c=>c.value),
+    testimonials:v("testimonials"),
+    domain:{domain:v("domain"),registrar:v("registrar"),access:v("registrarAccess"),notes:v("domainNotes")},
+    do_not_want:v("avoid"),
+    launch:{preferred_date:v("launchDate"),anything_else:v("anythingElse")}
+  };
+}
+function finish(){
+  const data=collect();
+  const status=document.getElementById("status");
+  const problems=[];
+  if(!data.business.phone) problems.push("your phone number (section 1)");
+  if(!data.services.length) problems.push("at least one service (section 3)");
+  if(problems.length){
+    status.className="error";
+    status.textContent="Almost there - I still need "+problems.join(" and ")+".";
+    return;
+  }
+  const slug=(data.business.name||"client").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+  const fname="intake_"+slug+"_"+new Date().toISOString().slice(0,10)+".json";
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob); a.download=fname;
+  document.body.appendChild(a); a.click(); a.remove();
+  status.className="ok";
+  status.textContent="Saved! A file called "+fname+" just downloaded - please email it back to me"+
+    (data.brand.has_logo_will_email||data.photos_promised.length?" along with your logo/photos.":".");
+}
+</script>
+</body>
+</html>

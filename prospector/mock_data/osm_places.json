@@ -1,0 +1,81 @@
+{
+  "elements": [
+    {
+      "type": "node",
+      "id": 1001,
+      "tags": {
+        "name": "Kanata Shine Auto Detailing",
+        "shop": "car_repair",
+        "phone": "+1 613 555 0101",
+        "opening_hours": "Mo-Sa 08:00-18:00",
+        "addr:housenumber": "120",
+        "addr:street": "Terence Matthews Crescent",
+        "addr:city": "Kanata"
+      }
+    },
+    {
+      "type": "way",
+      "id": 2002,
+      "tags": {
+        "name": "Bill's Mobile Detailing",
+        "shop": "car_repair",
+        "phone": "+1 613 555 0102",
+        "website": "http://billsmobiledetailing.example.com",
+        "addr:street": "March Road",
+        "addr:city": "Kanata"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3003,
+      "tags": {
+        "name": "Prestige Detail Co",
+        "amenity": "car_wash",
+        "phone": "+1 613 555 0103",
+        "opening_hours": "Mo-Fr 09:00-17:00",
+        "website": "https://prestige-detail.example.com",
+        "addr:city": "Kanata"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4004,
+      "tags": {
+        "name": "Crystal Clear Auto Spa",
+        "shop": "car_repair",
+        "phone": "+1 613 555 0104",
+        "opening_hours": "Mo-Su 08:00-20:00",
+        "website": "https://crystalclear.example.com",
+        "addr:street": "Eagleson Road",
+        "addr:city": "Kanata"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5005,
+      "tags": {
+        "name": "Ottawa West Detail Shop",
+        "shop": "car_repair",
+        "website": "http://ottawawestdetail.example.com",
+        "addr:city": "Ottawa"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6006,
+      "tags": {
+        "name": "Gone Forever Detailing",
+        "disused:shop": "car_repair",
+        "addr:city": "Nepean"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7007,
+      "tags": {
+        "shop": "car_repair",
+        "addr:city": "Kanata"
+      }
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+.env
+clients.csv
+analytics_2*.csv
+health_*.csv
+reports/
+cache/
+__pycache__/
+.pytest_cache/

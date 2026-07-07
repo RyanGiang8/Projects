@@ -1,0 +1,4 @@
+pipeline.db
+pipeline_export_*.csv
+__pycache__/
+.pytest_cache/

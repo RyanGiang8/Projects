@@ -1,0 +1,6 @@
+.env
+cache/
+leads_scored_*.csv
+__pycache__/
+*.pyc
+.pytest_cache/
