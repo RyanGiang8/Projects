@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{CLIENT}} — Monthly Website Report — {{MONTH_LABEL}}</title>
+<style>
+  :root{--ink:#1a1f2e;--muted:#5b6472;--line:#d9dee6;--accent:#0f6b4f;--accent-soft:#e7f3ee;--warn:#b3541e}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Georgia,'Times New Roman',serif;color:var(--ink);line-height:1.55;background:#fff}
+  .page{max-width:720px;margin:0 auto;padding:36px 28px}
+  header{display:flex;justify-content:space-between;align-items:baseline;border-bottom:3px solid var(--accent);padding-bottom:14px}
+  header .brand{font-size:1.05rem;color:var(--accent);font-weight:bold}
+  header .month{color:var(--muted);font-family:Arial,Helvetica,sans-serif;font-size:.9rem}
+  h1{font-size:1.5rem;margin:22px 0 2px}
+  .domain{color:var(--muted);font-family:Arial,Helvetica,sans-serif;font-size:.9rem}
+  section{margin:26px 0}
+  h2{font-size:.85rem;font-family:Arial,Helvetica,sans-serif;text-transform:uppercase;
+     letter-spacing:.09em;color:var(--accent);margin-bottom:8px}
+  .stat-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
+  .stat{flex:1;min-width:130px;background:var(--accent-soft);border-radius:9px;padding:14px}
+  .stat .n{font-size:1.6rem;font-weight:bold}
+  .stat .l{font-size:.78rem;font-family:Arial,Helvetica,sans-serif;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .health-badge{display:inline-block;font-family:Arial,Helvetica,sans-serif;font-size:.85rem;
+    padding:5px 14px;border-radius:20px;background:var(--accent-soft);color:var(--accent);font-weight:bold}
+  .health-badge.warn{background:#fbeee4;color:var(--warn)}
+  ul{padding-left:20px;margin-top:6px}
+  li{margin:5px 0}
+  .suggestion{border-left:4px solid var(--accent);background:var(--accent-soft);
+    border-radius:0 9px 9px 0;padding:14px 16px;margin-top:8px}
+  footer{border-top:1px solid var(--line);margin-top:34px;padding-top:14px;color:var(--muted);
+    font-size:.85rem;font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+  @media print{.page{padding:0}}
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="brand">{{BRAND_NAME}}</div>
+    <div class="month">Monthly Website Report — {{MONTH_LABEL}}</div>
+  </header>
+
+  <h1>{{CLIENT}}</h1>
+  <div class="domain">{{DOMAIN}} · {{PLAN}} plan</div>
+
+  <section>
+    <h2>Your traffic this month</h2>
+    <div class="stat-row">
+      <div class="stat"><div class="n">{{VISITS}}</div><div class="l">Visits</div></div>
+      <div class="stat"><div class="n">{{TOP_PAGE}}</div><div class="l">Most-visited page</div></div>
+      <div class="stat"><div class="n">{{COUNTRIES}}</div><div class="l">Visitor locations</div></div>
+    </div>
+    <p style="margin-top:12px">{{TRAFFIC_SUMMARY}}</p>
+  </section>
+
+  <section>
+    <h2>Site health</h2>
+    <span class="health-badge {{HEALTH_CLASS}}">{{HEALTH_BADGE}}</span>
+    <p style="margin-top:10px">{{HEALTH_SUMMARY}}</p>
+  </section>
+
+  <section>
+    <h2>What I did this month</h2>
+    <p>{{WORK_DONE}}</p>
+  </section>
+
+  <section>
+    <h2>One idea for next month</h2>
+    <div class="suggestion">{{SUGGESTION}}</div>
+  </section>
+
+  <footer>
+    <span>{{BRAND_NAME}} · {{BRAND_CONTACT}}</span>
+    <span>Questions or updates? Just reply to the email this came with.</span>
+  </footer>
+</div>
+</body>
+</html>
