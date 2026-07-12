@@ -15,7 +15,8 @@
     }
   ],
   "redirects": [
-    { "source": "/vantage", "destination": "/vantage/", "permanent": false }
+    { "source": "/vantage", "destination": "/vantage/", "permanent": false },
+    { "source": "/digital-consulting", "destination": "/digital-consulting/", "permanent": false }
   ],
   "rewrites": [
     { "source": "/vantage/:path*", "destination": "/vantage/index.html" }
