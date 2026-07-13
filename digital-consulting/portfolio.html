@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Work &amp; Examples | Ryan Giang — Digital Growth Ottawa</title>
+  <meta name="description" content="Live websites and concept work by Ryan Giang — modern, fast websites for Ottawa small businesses, including Chillō Café.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ryangiang.com/digital-consulting/portfolio.html">
+  <meta property="og:title" content="Work & Examples | Ryan Giang — Digital Growth Ottawa">
+  <meta property="og:description" content="Live websites and concept work: fast, modern sites for Ottawa small businesses.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_CA">
+  <meta property="og:url" content="https://ryangiang.com/digital-consulting/portfolio.html">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<canvas id="starfall" aria-hidden="true"></canvas>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="/">Ryan Giang <span>· Digital Growth</span></a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    <nav class="nav">
+      <a href="index.html#what">What you get</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#how">How it works</a>
+      <a href="portfolio.html">Work</a>
+      <a href="tel:+16137698188" class="nav-phone">613-769-8188</a>
+      <a href="index.html#contact" class="btn btn-primary btn-small">Get a free mockup</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <h1>Real sites. Real businesses.</h1>
+    <p>Every site here practices what the services page preaches: fast, mobile-perfect, and built to turn visitors into customers.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="kicker">Portfolio</span>
+    <h2>Recent work</h2>
+
+    <div class="work-grid">
+      <a class="work-card reveal" href="https://chillocafe.ca" target="_blank" rel="noopener">
+        <div class="work-preview">
+          <div class="browser-bar"><i></i><i></i><i></i><span class="url">chillocafe.ca</span></div>
+          <img src="assets/chillo.jpg" alt="Chillō Café website — hero page with brand mascot and café interior" loading="lazy" width="1000" height="625">
+        </div>
+        <div class="work-body">
+          <span class="tag tag-live">Live site</span>
+          <h3>Chillō Café</h3>
+          <p class="meta">Café · Ottawa · chillocafe.ca</p>
+          <p>Full brand website for a new Ottawa café — menu, location, and story. Fast static build, flawless on phones, local SEO from day one.</p>
+        </div>
+      </a>
+
+      <a class="work-card reveal" href="https://ryangiang.com" target="_blank" rel="noopener">
+        <div class="work-preview">
+          <div class="browser-bar"><i></i><i></i><i></i><span class="url">ryangiang.com</span></div>
+          <img src="assets/ryangiang.jpg" alt="Ryan Giang photography portfolio — automotive gallery" loading="lazy" width="1000" height="625">
+        </div>
+        <div class="work-body">
+          <span class="tag tag-live">Live site</span>
+          <h3>Photography Portfolio</h3>
+          <p class="meta">Portfolio · Ottawa · ryangiang.com</p>
+          <p>Photography portfolio with fast-loading galleries and a built-in web app. Designed, built, and maintained end to end.</p>
+        </div>
+      </a>
+
+      <div class="work-card reveal">
+        <div class="work-preview preview-soon">
+          <div class="mock-center"><div class="mock-sub">Coming soon</div></div>
+        </div>
+        <div class="work-body">
+          <span class="tag tag-soon">Concept</span>
+          <h3>Your business here</h3>
+          <p class="meta">Restaurants · Cafés · Shops · Trades</p>
+          <p>Demo builds for Ottawa businesses land here as they ship — marked as concept work until clients go live.</p>
+        </div>
+      </div>
+
+      <div class="work-card reveal">
+        <div class="work-preview preview-soon">
+          <div class="mock-center"><div class="mock-sub">Coming soon</div></div>
+        </div>
+        <div class="work-body">
+          <span class="tag tag-soon">Concept</span>
+          <h3>Free mockup — yours?</h3>
+          <p class="meta">Ottawa &amp; area</p>
+          <p>Want to see your business in this grid? The first look costs nothing — I'll send a real design before you spend a dollar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap reveal">
+    <span class="kicker">Next</span>
+    <h2>Want to see what your site could look like?</h2>
+    <p class="lead" style="margin-bottom: 28px;">Free mockup, no strings. You see the design before spending a dollar.</p>
+    <a href="index.html#contact" class="btn btn-primary">Get a free mockup →</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© 2026 Ryan Giang · Ottawa, ON</span>
+    <span><a href="index.html">Services</a> · <a href="mailto:ryangiang288@gmail.com">Contact</a></span>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+/* Starfall background — diagonal light streaks on canvas, tuned for a
+   white page. Runs only while visible; skipped for reduced motion. */
+(function(){
+  const canvas = document.getElementById('starfall');
+  if (!canvas) return;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ctx = canvas.getContext('2d');
+  const hues = [200, 215, 230, 255, 275, 315];
+  let w, h, dpr, streaks = [], running = false, rafId = null;
+
+  function resize(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = canvas.offsetWidth; h = canvas.offsetHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function makeStreak(initial){
+    const speed = 2 + Math.random() * 5;
+    return {
+      x: Math.random() * (w * 1.4) - w * 0.2,
+      y: initial ? Math.random() * h : -60 - Math.random() * h * 0.5,
+      len: 60 + Math.random() * 180,
+      speed,
+      hue: hues[Math.floor(Math.random() * hues.length)],
+      alpha: 0.22 + Math.random() * 0.4,
+      width: 0.6 + Math.random() * 1.6
+    };
+  }
+
+  const DX = 0.55, DY = 0.83;
+
+  function frame(){
+    ctx.clearRect(0, 0, w, h);
+    for (const s of streaks){
+      const grad = ctx.createLinearGradient(s.x, s.y, s.x - DX * s.len, s.y - DY * s.len);
+      grad.addColorStop(0, 'hsla(' + s.hue + ',85%,50%,' + s.alpha + ')');
+      grad.addColorStop(1, 'hsla(' + s.hue + ',85%,50%,0)');
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = s.width;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(s.x, s.y);
+      ctx.lineTo(s.x - DX * s.len, s.y - DY * s.len);
+      ctx.stroke();
+      s.x += DX * s.speed;
+      s.y += DY * s.speed;
+      if (s.y - s.len > h || s.x - s.len > w) Object.assign(s, makeStreak(false));
+    }
+    if (running) rafId = requestAnimationFrame(frame);
+  }
+
+  resize();
+  streaks = Array.from({ length: 26 }, () => makeStreak(true));
+  window.addEventListener('resize', () => { resize(); });
+
+  if (reduce){ frame(); return; }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !running){
+        running = true; rafId = requestAnimationFrame(frame);
+      } else if (!entry.isIntersecting && running){
+        running = false; if (rafId) cancelAnimationFrame(rafId);
+      }
+    });
+  });
+  io.observe(canvas);
+})();
+</script>
+</body>
+</html>
