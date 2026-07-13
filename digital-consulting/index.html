@@ -29,6 +29,8 @@
 </head>
 <body>
 
+<canvas id="starfall" aria-hidden="true"></canvas>
+
 <header class="site-header">
   <div class="wrap">
     <a class="logo" href="/">Ryan Giang <span>· Digital Consultant</span></a>
@@ -275,5 +277,78 @@
 </footer>
 
 <script src="main.js"></script>
+<script>
+/* Starfall background — diagonal light streaks on canvas, tuned for a
+   white page (saturated mid-lightness colors instead of near-white glow).
+   Runs only while visible; skipped for reduced motion. */
+(function(){
+  const canvas = document.getElementById('starfall');
+  if (!canvas) return;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ctx = canvas.getContext('2d');
+  const hues = [200, 215, 230, 255, 275, 315]; // cyan → blue → violet → pink
+  let w, h, dpr, streaks = [], running = false, rafId = null;
+
+  function resize(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = canvas.offsetWidth; h = canvas.offsetHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function makeStreak(initial){
+    const speed = 2 + Math.random() * 5;
+    return {
+      x: Math.random() * (w * 1.4) - w * 0.2,
+      y: initial ? Math.random() * h : -60 - Math.random() * h * 0.5,
+      len: 60 + Math.random() * 180,
+      speed,
+      hue: hues[Math.floor(Math.random() * hues.length)],
+      alpha: 0.22 + Math.random() * 0.4,
+      width: 0.6 + Math.random() * 1.6
+    };
+  }
+
+  // streaks travel down-right at ~34° like the reference design
+  const DX = 0.55, DY = 0.83;
+
+  function frame(){
+    ctx.clearRect(0, 0, w, h);
+    for (const s of streaks){
+      const grad = ctx.createLinearGradient(s.x, s.y, s.x - DX * s.len, s.y - DY * s.len);
+      grad.addColorStop(0, 'hsla(' + s.hue + ',85%,50%,' + s.alpha + ')');
+      grad.addColorStop(1, 'hsla(' + s.hue + ',85%,50%,0)');
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = s.width;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(s.x, s.y);
+      ctx.lineTo(s.x - DX * s.len, s.y - DY * s.len);
+      ctx.stroke();
+      s.x += DX * s.speed;
+      s.y += DY * s.speed;
+      if (s.y - s.len > h || s.x - s.len > w) Object.assign(s, makeStreak(false));
+    }
+    if (running) rafId = requestAnimationFrame(frame);
+  }
+
+  resize();
+  streaks = Array.from({ length: 26 }, () => makeStreak(true));
+  window.addEventListener('resize', () => { resize(); });
+
+  if (reduce){ frame(); return; } // one static frame, no animation
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !running){
+        running = true; rafId = requestAnimationFrame(frame);
+      } else if (!entry.isIntersecting && running){
+        running = false; if (rafId) cancelAnimationFrame(rafId);
+      }
+    });
+  });
+  io.observe(canvas);
+})();
+</script>
 </body>
 </html>
