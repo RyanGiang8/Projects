@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ryan Giang | Photographer in Ottawa, Toronto &amp; Montreal</title>
+<meta name="description" content="Ryan Giang is an Ottawa-based photographer covering automotive, portrait, landscape, street &amp; astrophotography across Ottawa, Toronto &amp; Montreal.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ryangiang.com/photography.html">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ryan Giang | Photographer in Ottawa, Toronto &amp; Montreal">
+<meta property="og:description" content="Automotive, portrait, landscape, street &amp; astrophotography by Ryan Giang — based in Ottawa, available across Ottawa, Toronto &amp; Montreal.">
+<meta property="og:url" content="https://ryangiang.com/photography.html">
+<meta property="og:image" content="https://ryangiang.com/og/og-photography.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ryan Giang | Photographer">
+<meta name="twitter:description" content="Automotive, portrait, landscape, street &amp; astrophotography — Ottawa, Toronto &amp; Montreal.">
+<meta name="twitter:image" content="https://ryangiang.com/og/og-photography.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Ryan Giang",
+  "url": "https://ryangiang.com/",
+  "image": "https://ryangiang.com/headshot.png",
+  "jobTitle": "Tax Analyst & Photographer",
+  "description": "Ottawa-based Tax Analyst at Deloitte and photographer specializing in automotive, portrait, landscape, street, and astrophotography across Ottawa, Toronto, and Montreal.",
+  "knowsAbout": ["Accounting", "Tax Advisory", "Photography", "Software Development"],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Ottawa",
+    "addressRegion": "ON",
+    "addressCountry": "CA"
+  },
+  "areaServed": ["Ottawa", "Toronto", "Montreal"],
+  "sameAs": [
+    "https://www.linkedin.com/in/ryangiang/",
+    "https://www.instagram.com/capitalcarz/"
+  ]
+}
+</script>
+
+<link rel="stylesheet" href="site.css">
+<style>
+  /* ---- animated text hero ---- */
+  header{padding:56px 24px 0;}
+  header h1{font-size:2.5rem;letter-spacing:-0.02em;font-weight:600;white-space:nowrap;}
+  header h1 .ltr{
+    display:inline-block;opacity:0;transform:translateY(26px) rotate(3deg);
+    animation:ltrIn .65s cubic-bezier(.22,1,.36,1) both;
+  }
+  @keyframes ltrIn{to{opacity:1;transform:translateY(0) rotate(0);}}
+  .hero-line{
+    height:2px;width:72px;margin:18px 0 14px;border-radius:2px;
+    background:linear-gradient(90deg,#6b7280,#fff,#6b7280);
+    background-size:200% 100%;
+    animation:heroLineIn .8s .55s cubic-bezier(.22,1,.36,1) both, shimmer 3.2s 1.4s linear infinite;
+    transform-origin:left;
+  }
+  @keyframes heroLineIn{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+  @keyframes shimmer{from{background-position:200% 0;}to{background-position:-200% 0;}}
+  header p{
+    color:#9ca3af;opacity:0;transform:translateY(12px);
+    animation:ltrIn .6s .75s cubic-bezier(.22,1,.36,1) both;
+  }
+  @media(min-width:768px){
+    header{padding:72px 48px 0;}
+    header h1{font-size:3.75rem;}
+  }
+
+  /* ---- tabs with sliding underline ---- */
+  nav{padding:0 24px;margin:32px 0;overflow-x:auto;}
+  nav .tabs{display:flex;gap:24px;border-bottom:1px solid #1f2937;min-width:max-content;position:relative;}
+  nav button{
+    background:none;border:none;color:#6b7280;font-size:1rem;cursor:pointer;
+    padding:0 8px 16px;position:relative;transition:color .2s;white-space:nowrap;
+  }
+  nav button:hover{color:#d1d5db;}
+  nav button.active{color:#fff;}
+  #tabIndicator{
+    position:absolute;bottom:-1px;height:2px;background:#fff;
+    transition:left .35s cubic-bezier(.22,1,.36,1),width .35s cubic-bezier(.22,1,.36,1);
+  }
+  @media(min-width:768px){ nav{padding:0 48px;} }
+
+  main{padding:0 24px 48px;}
+  @media(min-width:768px){ main{padding:0 48px 48px;} }
+
+  .grid{column-count:1;column-gap:16px;transition:opacity .22s ease;}
+  .grid.switching{opacity:0;}
+  @media(min-width:768px){ .grid{column-count:2;} }
+  @media(min-width:1024px){ .grid{column-count:3;} }
+
+  .photo{
+    position:relative;overflow:hidden;background:#111827;
+    cursor:pointer;margin-bottom:16px;break-inside:avoid;
+  }
+  /* blur-up: images fade in from a soft blur once loaded */
+  .photo img{
+    width:100%;height:auto;display:block;
+    filter:blur(16px);opacity:.4;
+    transition:transform .5s ease,filter .6s ease,opacity .6s ease;
+  }
+  .photo img.loaded{filter:blur(0);opacity:1;}
+  .photo:hover img{transform:scale(1.03);}
+  .photo .overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(to top, rgba(0,0,0,.45), transparent 60%);
+    opacity:0;transition:opacity .3s;
+  }
+  .photo:hover .overlay{opacity:1;}
+
+  /* ---- lightbox with prev/next, swipe, counter ---- */
+  #lightbox{
+    position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;
+    align-items:center;justify-content:center;z-index:50;padding:24px;
+    touch-action:pan-y;
+  }
+  #lightbox.open{display:flex;}
+  #lightbox img{max-width:100%;max-height:85vh;object-fit:contain;user-select:none;-webkit-user-drag:none;}
+  #lightbox .close{
+    position:absolute;top:24px;right:24px;color:#fff;font-size:2rem;
+    cursor:pointer;background:none;border:none;line-height:1;
+    padding:12px;min-width:44px;min-height:44px;z-index:2;
+  }
+  #lightbox .lb-nav{
+    position:absolute;top:50%;transform:translateY(-50%);z-index:2;
+    width:48px;height:48px;border-radius:50%;cursor:pointer;
+    border:1px solid rgba(255,255,255,.25);color:#fff;
+    background:rgba(0,0,0,.45);
+    -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+    display:flex;align-items:center;justify-content:center;
+    transition:background .2s,border-color .2s;
+  }
+  #lightbox .lb-nav:hover{background:rgba(255,255,255,.15);border-color:#fff;}
+  #lightbox .lb-nav svg{width:20px;height:20px;}
+  #lbPrev{left:16px;}
+  #lbNext{right:16px;}
+  #lbCounter{
+    position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
+    color:#d1d5db;font-size:.85rem;letter-spacing:.08em;z-index:2;
+    background:rgba(0,0,0,.45);padding:6px 14px;border-radius:999px;
+    -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  }
+  @media(max-width:600px){
+    #lightbox .lb-nav{width:42px;height:42px;}
+    #lbPrev{left:8px;} #lbNext{right:8px;}
+  }
+  #lightbox .close:focus-visible,
+  #lightbox .lb-nav:focus-visible{outline:2px solid #fff;outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<div class="sitenav">
+  <a href="index.html" class="brand">Ryan Giang - Portfolio</a>
+  <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="siteNavLinks"><span></span></button>
+  <div class="sitenav-links" id="siteNavLinks">
+    <a href="index.html">About</a>
+    <a href="photography.html" class="current">Photography</a>
+    <a href="projects.html">Projects</a>
+    <a href="/digital-consulting/">Digital Growth Services</a>
+    <button type="button" data-open-contact>Contact</button>
+  </div>
+</div>
+
+<header>
+  <h1 data-parallax="0.1" aria-label="Ryan Giang"><span class="ltr" style="animation-delay:.05s">R</span><span class="ltr" style="animation-delay:.1s">y</span><span class="ltr" style="animation-delay:.15s">a</span><span class="ltr" style="animation-delay:.2s">n</span><span class="ltr" style="animation-delay:.25s">&nbsp;</span><span class="ltr" style="animation-delay:.3s">G</span><span class="ltr" style="animation-delay:.35s">i</span><span class="ltr" style="animation-delay:.4s">a</span><span class="ltr" style="animation-delay:.45s">n</span><span class="ltr" style="animation-delay:.5s">g</span></h1>
+  <div class="hero-line" aria-hidden="true"></div>
+  <p>Photography Portfolio</p>
+</header>
+
+<nav>
+  <div class="tabs" id="tabs"></div>
+</nav>
+
+<main>
+  <div class="grid" id="grid"></div>
+</main>
+
+<!-- ============ EDIT ME: GEAR ============ -->
+<section id="equipment">
+  <div class="glow glow-blue" style="width:400px;height:400px;top:-140px;left:-120px;" aria-hidden="true"></div>
+  <p class="section-label">Equipment</p>
+  <h2>What I shoot with</h2>
+  <div class="spec-grid reveal">
+    <div class="spec-group">
+      <h3>Camera Bodies</h3>
+      <ul>
+        <li>Sony A7III</li>
+        <li>Nikon D2XS</li>
+      </ul>
+    </div>
+    <div class="spec-group">
+      <h3>Lenses</h3>
+      <ul>
+        <li>Sigma 24-70mm F2.8 ART</li>
+        <li>Sony 16mm F1.8 G</li>
+        <li>Sony 35mm F1.8</li>
+      </ul>
+    </div>
+    <div class="spec-group">
+      <h3>Other Gear</h3>
+      <ul>
+        <li>ProMist Filters</li>
+        <li>NiSi Variable ND Filters</li>
+        <li>Polarizers</li>
+        <li>Vanguard VEO 2S Tripod</li>
+        <li>Rode VideoMic Pro+</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="row">
+    <p>&copy; 2026 Ryan Giang. All rights reserved.</p>
+    <div class="links">
+      <a href="https://www.instagram.com/capitalcarz/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.linkedin.com/in/ryangiang/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="index.html">About</a>
+      <a href="projects.html">Projects</a>
+      <button type="button" data-open-contact>Contact</button>
+    </div>
+  </div>
+</footer>
+
+<div id="lightbox">
+  <button class="close" id="lightboxClose" aria-label="Close">&times;</button>
+  <button class="lb-nav" id="lbPrev" aria-label="Previous photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+  <img id="lightboxImg" src="" alt="">
+  <button class="lb-nav" id="lbNext" aria-label="Next photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+  <p id="lbCounter" aria-live="polite"></p>
+</div>
+
+<div id="contactModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+  <div class="modal">
+    <button class="modal-close" id="contactClose" aria-label="Close contact form">&times;</button>
+    <h2 id="contactTitle">Get in Touch</h2>
+    <p class="modal-sub">Have a project in mind, or just want to say hi? Send a message below.</p>
+    <form id="contactForm" novalidate>
+      <label for="cf-name">Name</label>
+      <input type="text" id="cf-name" name="name" autocomplete="name" required>
+      <label for="cf-email">Email</label>
+      <input type="email" id="cf-email" name="email" autocomplete="email" required>
+      <label for="cf-message">Message</label>
+      <textarea id="cf-message" name="message" rows="5" required></textarea>
+      <button type="submit" id="cf-submit">Send Message</button>
+      <p class="form-status" id="cf-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</div>
+
+<script src="contact.js"></script>
+<script>
+function buildCategory(folder, files){
+  return files.map((f, i) => ({
+    url: `Media/${folder}/${f}`,
+    alt: `${folder} photography by Ryan Giang, Ottawa-based photographer — photo ${i + 1}`
+  }));
+}
+
+/* AUTO-GENERATED:START — do not hand-edit; run `python3 update_media.py` instead */
+const photosByCategory = {
+  automotive: buildCategory('Automotive', ['ryan-giang-automotive-ottawa-01.jpg','ryan-giang-automotive-ottawa-02.jpg','ryan-giang-automotive-ottawa-03.jpg','ryan-giang-automotive-ottawa-04.jpg','ryan-giang-automotive-ottawa-05.jpg','ryan-giang-automotive-ottawa-06.jpg','ryan-giang-automotive-ottawa-07.jpg','ryan-giang-automotive-ottawa-08.jpg','ryan-giang-automotive-ottawa-09.jpg','ryan-giang-automotive-ottawa-10.jpg','ryan-giang-automotive-ottawa-11.jpg','ryan-giang-automotive-ottawa-12.jpg','ryan-giang-automotive-ottawa-13.jpg','ryan-giang-automotive-ottawa-14.jpg','ryan-giang-automotive-ottawa-15.jpg','ryan-giang-automotive-ottawa-16.jpg','ryan-giang-automotive-ottawa-17.jpg','ryan-giang-automotive-ottawa-18.jpg','ryan-giang-automotive-ottawa-19.jpg','ryan-giang-automotive-ottawa-20.jpg','ryan-giang-automotive-ottawa-21.jpg','ryan-giang-automotive-ottawa-22.jpg','ryan-giang-automotive-ottawa-23.jpg','ryan-giang-automotive-ottawa-24.jpg','ryan-giang-automotive-ottawa-25.jpg','ryan-giang-automotive-ottawa-26.jpg','ryan-giang-automotive-ottawa-27.jpg','ryan-giang-automotive-ottawa-28.jpg','ryan-giang-automotive-ottawa-29.jpg','ryan-giang-automotive-ottawa-30.jpg']),
+  landscape: buildCategory('Landscape', ['ryan-giang-landscape-ottawa-01.jpg','ryan-giang-landscape-ottawa-02.jpg','ryan-giang-landscape-ottawa-03.jpg','ryan-giang-landscape-ottawa-04.jpg','ryan-giang-landscape-ottawa-05.jpg','ryan-giang-landscape-ottawa-06.jpg','ryan-giang-landscape-ottawa-07.jpg','ryan-giang-landscape-ottawa-08.jpg']),
+  portrait: buildCategory('Portrait', ['ryan-giang-portrait-ottawa-01.jpg','ryan-giang-portrait-ottawa-02.jpg','ryan-giang-portrait-ottawa-03.jpg','ryan-giang-portrait-ottawa-04.jpg','ryan-giang-portrait-ottawa-05.jpg','ryan-giang-portrait-ottawa-06.jpg']),
+  street: buildCategory('Street', ['ryan-giang-street-ottawa-01.jpg','ryan-giang-street-ottawa-02.jpg','ryan-giang-street-ottawa-03.jpg','ryan-giang-street-ottawa-04.jpg','ryan-giang-street-ottawa-05.jpg','ryan-giang-street-ottawa-06.jpg','ryan-giang-street-ottawa-07.jpg','ryan-giang-street-ottawa-08.jpg','ryan-giang-street-ottawa-09.jpg','ryan-giang-street-ottawa-10.jpg','ryan-giang-street-ottawa-11.jpg','ryan-giang-street-ottawa-12.jpg','ryan-giang-street-ottawa-13.jpg','ryan-giang-street-ottawa-14.jpg','ryan-giang-street-ottawa-15.jpg','ryan-giang-street-ottawa-16.jpg','ryan-giang-street-ottawa-17.jpg','ryan-giang-street-ottawa-18.jpg','ryan-giang-street-ottawa-19.jpg','ryan-giang-street-ottawa-20.jpg','ryan-giang-street-ottawa-21.jpg','ryan-giang-street-ottawa-22.jpg']),
+  astrophotography: buildCategory('Astrophotography', ['ryan-giang-astrophotography-ottawa-01.jpg','ryan-giang-astrophotography-ottawa-02.jpg','ryan-giang-astrophotography-ottawa-03.jpg','ryan-giang-astrophotography-ottawa-04.jpg','ryan-giang-astrophotography-ottawa-05.jpg','ryan-giang-astrophotography-ottawa-06.jpg']),
+  corporate: buildCategory('Corporate', ['ryan-giang-corporate-ottawa-01.jpg','ryan-giang-corporate-ottawa-02.jpg','ryan-giang-corporate-ottawa-03.jpg','ryan-giang-corporate-ottawa-04.jpg','ryan-giang-corporate-ottawa-05.jpg','ryan-giang-corporate-ottawa-06.jpg','ryan-giang-corporate-ottawa-07.jpg','ryan-giang-corporate-ottawa-08.jpg'])
+};
+
+const tabs = [
+  { id:'automotive', label:'Automotive' },
+  { id:'landscape', label:'Landscape' },
+  { id:'portrait', label:'Portrait' },
+  { id:'street', label:'Street' },
+  { id:'astrophotography', label:'Astrophotography' },
+  { id:'corporate', label:'Corporate' }
+];
+/* AUTO-GENERATED:END */
+
+let activeCategory = 'automotive';
+
+/* sliding underline under the active tab */
+function moveTabIndicator(){
+  const tabsEl = document.getElementById('tabs');
+  const indicator = document.getElementById('tabIndicator');
+  const active = tabsEl.querySelector('button.active');
+  if (!active || !indicator) return;
+  indicator.style.left = active.offsetLeft + 'px';
+  indicator.style.width = active.offsetWidth + 'px';
+}
+
+function renderTabs(){
+  const tabsEl = document.getElementById('tabs');
+  tabsEl.innerHTML = tabs.map(t =>
+    `<button class="${t.id===activeCategory?'active':''}" data-id="${t.id}">${t.label}</button>`
+  ).join('') + '<span id="tabIndicator" aria-hidden="true"></span>';
+  tabsEl.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (btn.dataset.id === activeCategory) return;
+      activeCategory = btn.dataset.id;
+      tabsEl.querySelectorAll('button').forEach(b => b.classList.toggle('active', b.dataset.id === activeCategory));
+      moveTabIndicator();
+      renderGrid(true);
+    });
+  });
+  moveTabIndicator();
+}
+
+/* blur-up: mark each image loaded so CSS can un-blur it */
+function watchLoad(img){
+  if (img.complete && img.naturalWidth > 0) { img.classList.add('loaded'); return; }
+  img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
+  img.addEventListener('error', () => img.classList.add('loaded'), { once: true });
+}
+
+function renderGrid(crossfade){
+  const gridEl = document.getElementById('grid');
+  const doRender = () => {
+    gridEl.innerHTML = photosByCategory[activeCategory].map((photo, i) => `
+      <div class="photo" data-idx="${i}">
+        <img src="${photo.url}" alt="${photo.alt}" loading="lazy">
+        <div class="overlay"></div>
+      </div>
+    `).join('');
+    gridEl.querySelectorAll('img').forEach(watchLoad);
+    gridEl.querySelectorAll('.photo').forEach(el => {
+      el.addEventListener('click', () => openLightbox(parseInt(el.dataset.idx, 10)));
+    });
+    gridEl.classList.remove('switching');
+  };
+  if (crossfade) {
+    gridEl.classList.add('switching');
+    setTimeout(doRender, 220);
+  } else {
+    doRender();
+  }
+}
+
+/* ---- lightbox with prev/next, keyboard, swipe, counter ---- */
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lightboxImg');
+const lbCounter = document.getElementById('lbCounter');
+let lbIndex = 0;
+
+function showLightboxPhoto(){
+  const list = photosByCategory[activeCategory];
+  const photo = list[lbIndex];
+  lbImg.src = photo.url;
+  lbImg.alt = photo.alt;
+  lbCounter.textContent = (lbIndex + 1) + ' / ' + list.length;
+}
+function openLightbox(idx){
+  lbIndex = idx;
+  showLightboxPhoto();
+  lightbox.classList.add('open');
+}
+function closeLightbox(){ lightbox.classList.remove('open'); }
+function stepLightbox(delta){
+  const list = photosByCategory[activeCategory];
+  lbIndex = (lbIndex + delta + list.length) % list.length;
+  showLightboxPhoto();
+}
+
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+document.getElementById('lbPrev').addEventListener('click', (e) => { e.stopPropagation(); stepLightbox(-1); });
+document.getElementById('lbNext').addEventListener('click', (e) => { e.stopPropagation(); stepLightbox(1); });
+lightbox.addEventListener('click', (e) => { if(e.target===lightbox) closeLightbox(); });
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  else if (e.key === 'ArrowLeft') stepLightbox(-1);
+  else if (e.key === 'ArrowRight') stepLightbox(1);
+});
+
+/* swipe left/right on touch devices */
+let touchStartX = null;
+lightbox.addEventListener('touchstart', (e) => {
+  if (e.touches.length === 1) touchStartX = e.touches[0].clientX;
+}, { passive: true });
+lightbox.addEventListener('touchend', (e) => {
+  if (touchStartX === null) return;
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  touchStartX = null;
+  if (Math.abs(dx) > 48) stepLightbox(dx < 0 ? 1 : -1);
+}, { passive: true });
+
+window.addEventListener('resize', moveTabIndicator);
+
+renderTabs();
+renderGrid(false);
+</script>
+
+<script src="motion.js"></script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
