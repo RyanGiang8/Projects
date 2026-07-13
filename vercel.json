@@ -1,4 +1,5 @@
 {
+  "cleanUrls": true,
   "headers": [
     {
       "source": "/(.*)",
@@ -16,7 +17,8 @@
   ],
   "redirects": [
     { "source": "/vantage", "destination": "/vantage/", "permanent": false },
-    { "source": "/digital-consulting", "destination": "/digital-consulting/", "permanent": false }
+    { "source": "/digital-consulting", "destination": "/digital-growth", "permanent": true },
+    { "source": "/digital-consulting/:path*", "destination": "/digital-growth/:path*", "permanent": true }
   ],
   "rewrites": [
     { "source": "/vantage/:path*", "destination": "/vantage/index.html" }
