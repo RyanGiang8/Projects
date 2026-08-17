@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 """
 Scans Media/<Category> folders, compresses any oversized photos with sips,
-and regenerates the photosByCategory/tabs block in photography.html to match
-exactly what's on disk.
+then regenerates BOTH photography surfaces to match exactly what's on disk:
+
+  * photography-galleries.html — the photosByCategory/tabs block
+    (categorised masonry galleries)
+  * assets/gallery/ + photography.html — web-sized thumbnails and the
+    GALLERY_IMAGES array powering the 3D landing gallery
 
 Usage:
     python3 update_media.py
@@ -19,7 +23,11 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).parent
-MEDIA = ROOT / "photography.html"
+GALLERIES = ROOT / "photography-galleries.html"
+LANDING = ROOT / "photography.html"
+THUMB_DIR = ROOT / "assets" / "gallery"
+THUMB_MAX = 800
+THUMB_QUALITY = 60
 MEDIA_DIR = ROOT / "Media"
 
 IMAGE_EXTS = {".jpg", ".jpeg", ".png"}
@@ -105,6 +113,72 @@ def render_block(categories):
     return "\n".join(lines)
 
 
+def sync_thumbnails(categories):
+    """Mirror Media/ into assets/gallery/ as small web-sized JPEGs.
+
+    The 3D gallery uploads every image as a WebGL texture, so it needs
+    small files — full-resolution originals would blow out VRAM and
+    bandwidth. Thumbnails are generated on demand and stale ones pruned.
+    """
+    THUMB_DIR.mkdir(parents=True, exist_ok=True)
+    expected = {}
+    for folder, files in categories:
+        for f in files:
+            src = MEDIA_DIR / folder / f
+            thumb = THUMB_DIR / (Path(f).stem + ".jpg")
+            expected[thumb.name] = (src, folder)
+
+    made = 0
+    for name, (src, _folder) in expected.items():
+        thumb = THUMB_DIR / name
+        if thumb.exists() and thumb.stat().st_mtime >= src.stat().st_mtime:
+            continue
+        subprocess.run(
+            ["sips", "-Z", str(THUMB_MAX), "-s", "format", "jpeg",
+             "-s", "formatOptions", str(THUMB_QUALITY), str(src), "--out", str(thumb)],
+            capture_output=True
+        )
+        made += 1
+
+    removed = 0
+    for existing in THUMB_DIR.glob("*.jpg"):
+        if existing.name not in expected:
+            existing.unlink()
+            removed += 1
+
+    print(f"Thumbnails: {made} generated, {removed} pruned, {len(expected)} total.")
+    return expected
+
+
+def render_landing_array(expected):
+    """Interleave categories so the 3D tunnel mixes genres."""
+    by_cat = {}
+    for name, (_src, folder) in expected.items():
+        by_cat.setdefault(folder, []).append(name)
+    for v in by_cat.values():
+        v.sort()
+
+    order = []
+    while any(by_cat.values()):
+        for folder in sorted(by_cat):
+            if by_cat[folder]:
+                order.append((by_cat[folder].pop(0), folder))
+
+    rows = [
+        '  {src:"/assets/gallery/%s",alt:"%s photography by Ryan Giang"}' % (name, folder)
+        for name, folder in order
+    ]
+    return "[\n" + ",\n".join(rows) + "\n]"
+
+
+def replace_block(path: Path, pattern: re.Pattern, new_text: str, label: str):
+    html = path.read_text()
+    if not pattern.search(html):
+        sys.exit(f"Could not find {label} markers in {path.name}")
+    path.write_text(pattern.sub(lambda _m: new_text, html, count=1))
+    print(f"{path.name} updated ({label}).")
+
+
 def main():
     if not MEDIA_DIR.is_dir():
         sys.exit(f"Media directory not found at {MEDIA_DIR}")
@@ -125,18 +199,21 @@ def main():
     for folder, files in categories:
         print(f"  {folder}: {len(files)} photo(s)")
 
-    html = MEDIA.read_text()
-    pattern = re.compile(
-        r"/\* AUTO-GENERATED:START.*?AUTO-GENERATED:END \*/",
-        re.DOTALL
+    print()
+    replace_block(
+        GALLERIES,
+        re.compile(r"/\* AUTO-GENERATED:START.*?AUTO-GENERATED:END \*/", re.DOTALL),
+        render_block(categories),
+        "AUTO-GENERATED",
     )
-    if not pattern.search(html):
-        sys.exit(f"Could not find AUTO-GENERATED markers in {MEDIA.name}")
 
-    new_block = render_block(categories)
-    html = pattern.sub(new_block, html, count=1)
-    MEDIA.write_text(html)
-    print(f"\n{MEDIA.name} updated.")
+    expected = sync_thumbnails(categories)
+    replace_block(
+        LANDING,
+        re.compile(r"var GALLERY_IMAGES = \[.*?\];", re.DOTALL),
+        "var GALLERY_IMAGES = " + render_landing_array(expected) + ";",
+        "GALLERY_IMAGES",
+    )
 
 
 if __name__ == "__main__":
