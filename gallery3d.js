@@ -187,12 +187,14 @@
     // ---- plane ring ----------------------------------------------------
     var planes = [];
     for (var i = 0; i < visibleCount; i++) {
-      var ha = (i * 2.618) % (Math.PI * 2), va = (i * 1.618 + Math.PI / 3) % (Math.PI * 2);
+      // golden angle keeps the ring from clumping; radius varies per plane so
+      // some sweep wide and some pass closer to the middle
       planes.push({
         z: (DEPTH / visibleCount) * i,
         imageIndex: i % images.length,
-        x: Math.sin(ha) * ((i % 3) * 1.2) * MAX_X / 3,
-        y: Math.cos(va) * (((i + 1) % 4) * 0.8) * MAX_Y / 4,
+        ang: (i * 2.39996) % (Math.PI * 2),
+        rad: 0.45 + ((i * 0.37) % 1) * 0.55,
+        x: 0, y: 0,
         hover: 0
       });
     }
@@ -261,11 +263,21 @@
       return best;
     }
 
-    function sizeFor(p) {
+    // A plane heading straight at the lens fills the whole frame right before
+  // it passes through it. Push each one outward along its own angle as it
+  // approaches, so it sweeps past the edge of the view instead.
+  var R_FAR = 3.2, R_NEAR = 16.0;
+  function radiusAt(wz) {
+    var t = 1 - Math.min(1, Math.max(0, -wz / (DEPTH / 2)));
+    var k = t * t * t * t;
+    return R_FAR + k * (R_NEAR - R_FAR);
+  }
+
+  function sizeFor(p) {
       var t = texCache[p.imageIndex];
       if (!t) return null;
       var a = t.w / t.h;
-      return a > 1 ? [2 * a, 2] : [2, 2 / a];
+      return a > 1 ? [2.4 * a, 2.4] : [2.4, 2.4 / a];
     }
 
     function ramp(v, a, b) { return (v - a) / (b - a); }
@@ -312,6 +324,12 @@
         else if (n <= blurCfg.outEnd) bl = blurCfg.max * ramp(n, blurCfg.outStart, blurCfg.outEnd);
         else bl = blurCfg.max;
         bl = Math.max(0, Math.min(blurCfg.max, bl));
+
+        // resolve the drifted position for this frame
+        var wzNow = p.z - DEPTH / 2;
+        var r = radiusAt(wzNow);
+        p.x = Math.cos(p.ang) * r * p.rad * (MAX_X / 5.5);
+        p.y = Math.sin(p.ang) * r * p.rad * (MAX_Y / 5.5) * 0.72;
 
         if (op <= 0.002) continue;
         // fetch the texture a little before the plane fades in
