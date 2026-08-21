@@ -145,10 +145,20 @@ img{max-width:100%;display:block;}
    HERO
    ============================================================ */
 .hero{
+  position:relative;overflow:hidden;
   min-height:82vh;display:flex;flex-direction:column;
   align-items:center;justify-content:center;text-align:center;
   padding:80px 24px 64px;
 }
+/* candlestick backdrop sits behind the hero copy */
+#mkt{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+/* vignette keeps the name legible over the chart */
+.hero::after{
+  content:'';position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%);width:150%;height:190%;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse 46% 42% at 50% 50%,rgba(8,8,15,.92),rgba(8,8,15,.66) 52%,transparent 78%);
+}
+.hero > *:not(#mkt){position:relative;z-index:2;}
 .eyebrow{
   font-family:var(--serif);font-style:italic;color:var(--muted);
   font-size:clamp(1rem,2.2vw,1.3rem);letter-spacing:.03em;margin-bottom:14px;
@@ -389,6 +399,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;}
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
+  <canvas id="mkt" aria-hidden="true"></canvas>
   <p class="eyebrow rv">Accountant · Tax Analyst · Developer</p>
   <div class="name-stack rv">
     <h1 class="name glow">Ryan Giang</h1>
@@ -833,6 +844,106 @@ footer{border-top:1px solid var(--line);padding:36px 0;}
   document.addEventListener('visibilitychange',function(){
     if(document.hidden){ running=false; if(raf)cancelAnimationFrame(raf); }
     else if(!running){ running=true; raf=requestAnimationFrame(draw); }
+  });
+})();
+
+/* ---------- hero candlesticks: a new bar prints every ~40 frames ----------
+   Deliberately unlabelled — this is texture, not a quote feed. ---------- */
+(function(){
+  var c=document.getElementById('mkt');
+  if(!c) return;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ctx=c.getContext('2d'), w,h,candles=[],ma=[],t=0,raf=null;
+
+  function step(prev){
+    var drift=0.22, vol=1.9, o=prev;
+    var cl=o+drift+(Math.random()-0.5)*vol*2;
+    return {o:o,c:cl,
+      h:Math.max(o,cl)+Math.random()*vol,
+      l:Math.min(o,cl)-Math.random()*vol};
+  }
+  function count(){ return w<620?46:90; }
+  function rebuildMA(){
+    ma=[]; var win=12;
+    for(var i=0;i<candles.length;i++){
+      var s=0,n=0;
+      for(var j=Math.max(0,i-win);j<=i;j++){ s+=candles[j].c; n++; }
+      ma.push(s/n);
+    }
+  }
+  function seed(){
+    candles=[]; var px=100, n=count();
+    for(var i=0;i<n;i++){ candles.push(step(px)); px=candles[i].c; }
+    rebuildMA();
+  }
+  function size(){
+    var dpr=Math.min(window.devicePixelRatio||1,2);
+    w=c.offsetWidth; h=c.offsetHeight;
+    c.width=w*dpr; c.height=h*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    var lo=Infinity,hi=-Infinity;
+    for(var i=0;i<candles.length;i++){ lo=Math.min(lo,candles[i].l); hi=Math.max(hi,candles[i].h); }
+    var pad=(hi-lo)*0.12; lo-=pad; hi+=pad;
+    var top=h*0.10, bot=h*0.86;
+    function Y(v){ return bot-((v-lo)/(hi-lo))*(bot-top); }
+
+    ctx.strokeStyle='rgba(255,255,255,.045)'; ctx.lineWidth=1;
+    for(var g=0;g<=5;g++){
+      var gy=Math.round(top+(bot-top)*(g/5))+.5;
+      ctx.beginPath(); ctx.moveTo(0,gy); ctx.lineTo(w,gy); ctx.stroke();
+    }
+
+    var cw=w/candles.length, bw=Math.max(2,cw*0.52);
+    for(var k=0;k<candles.length;k++){
+      var kk=candles[k], x=k*cw+cw/2;
+      var col=kk.c>=kk.o?'rgba(74,214,160,':'rgba(224,104,95,';
+      var a=0.20+0.55*(k/candles.length);   // older bars recede
+      ctx.strokeStyle=col+(a*0.85).toFixed(3)+')'; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(x,Y(kk.h)); ctx.lineTo(x,Y(kk.l)); ctx.stroke();
+      ctx.fillStyle=col+a.toFixed(3)+')';
+      var yo=Y(kk.o), yc=Y(kk.c);
+      ctx.fillRect(x-bw/2,Math.min(yo,yc),bw,Math.max(1.5,Math.abs(yc-yo)));
+    }
+
+    ctx.strokeStyle='rgba(139,124,246,.55)'; ctx.lineWidth=1.4; ctx.lineJoin='round';
+    ctx.beginPath();
+    for(var m=0;m<ma.length;m++){
+      var mx=m*cw+cw/2, my=Y(ma[m]);
+      m?ctx.lineTo(mx,my):ctx.moveTo(mx,my);
+    }
+    ctx.stroke();
+
+    var ly=Y(candles[candles.length-1].c);
+    ctx.setLineDash([4,5]);
+    ctx.strokeStyle='rgba(139,124,246,.35)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(0,ly); ctx.lineTo(w,ly); ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  function tick(){
+    t++;
+    if(t%40===0){
+      candles.push(step(candles[candles.length-1].c));
+      candles.shift(); rebuildMA();
+    }
+    draw();
+    raf=requestAnimationFrame(tick);
+  }
+
+  size(); seed();
+  var mt;
+  window.addEventListener('resize',function(){
+    clearTimeout(mt); mt=setTimeout(function(){ size(); seed(); draw(); },150);
+  });
+  if(reduce){ draw(); return; }
+  raf=requestAnimationFrame(tick);
+  document.addEventListener('visibilitychange',function(){
+    if(document.hidden){ if(raf)cancelAnimationFrame(raf); raf=null; }
+    else if(!raf){ raf=requestAnimationFrame(tick); }
   });
 })();
 </script>
